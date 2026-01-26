@@ -1,0 +1,24 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build outputs
+**/bin/
+**/obj/
+
+# NuGet
+**/packages/
+*.nupkg
+
+# Logs
+*.log
+
+# DB backups / local files
+*.bak
+
+# (Opsiyonel) publish çıktıları
+**/Publish/
+**/App_Data/
