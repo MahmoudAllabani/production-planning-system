@@ -1,0 +1,50 @@
+﻿
+@model MDK.Models.Kategori
+
+@{
+    ViewBag.Title = "Kategori Düzenleme";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kategori Düzenleme</title>
+    <link rel="stylesheet" href="~/purple/assets/vendors/mdi/css/materialdesignicons.min.css" />
+    <link rel="stylesheet" href="~/purple/assets/vendors/css/vendor.bundle.base.css" />
+    <link rel="stylesheet" href="~/purple/assets/css/style.css" />
+</head>
+<body>
+    <div class="col-md-8 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-5">Kategori Düzenleme</h4>
+
+                @using (Html.BeginForm("Edit_C", "Category", FormMethod.Post, new { @class = "forms-sample" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.Id)
+
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="Kategori1" class="form-label">Kategori Adı</label>
+                            @Html.TextBoxFor(m => m.Kategori1,
+                                new
+                                {
+                                    @class = "form-control",
+                                    id = "Kategori1",
+                                    placeholder = "Kategori adını giriniz"
+                                })
+                            @Html.ValidationMessageFor(m => m.Kategori1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-gradient-primary me-2">Kaydet</button>
+                    <a href="@Url.Action("Index_C", "category")" class="btn btn-light">İptal</a>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

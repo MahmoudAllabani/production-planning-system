@@ -1,0 +1,109 @@
+@model IEnumerable<MDK.Models.Siparis>
+
+@{
+    ViewBag.Title = "Order List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sipariş Listesi</title>
+    <link rel="stylesheet"
+          href="/purple/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet"
+          href="/purple/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/purple/assets/css/style.css" />
+
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Siparis Listesi</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Musteri</th>
+                        <th>UrUn</th>
+                        <th>Miktar</th>
+                        <th>Siparis Tarihi</th>
+                        <th>Teslim Tarihi</th>
+                        <th>Islemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model)
+                    {
+                        <tr>
+                            <td>@order.Id</td>
+                            <td>@order.Musteri.Ad @order.Musteri.Soyad</td>
+                            <td>@order.Urun.Urun_Ad</td>
+                            <td>@order.Miktar</td>
+                            <td>@(order.Siparis_Tarihi.HasValue ? order.Siparis_Tarihi.Value.ToString("yyyy-MM-dd") : "")</td>
+                            <td>@(order.Teslim_Tarihi.HasValue ? order.Teslim_Tarihi.Value.ToString("yyyy-MM-dd") : "")</td>
+                            <td>
+                                <div class="d-flex">
+                                    <button type="submit"
+                                            class="btn btn-primary btn-sm btn-icon-split p-1 mx-1" onclick="window.location.href = '/Order/Details_SI/@order.Id'">
+                                        Detaylar
+                                    </button>
+                                    <button type="submit"
+                                            class="btn btn-gradient-warning btn-sm btn-icon-split p-1 mx-1" onclick="window.location.href = '/Order/Edit_SI/@order.Id'">
+                                        Duzenle
+                                    </button>
+                                    <button type="submit"
+                                            class="btn btn-danger btn-sm btn-icon-split p-1 mx-1 pr-3 pl-3"
+                                            onclick="confirmDelete(@order.Id)">
+                                        Sil
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-between mt-4">
+                <a href="/Order/Create_SI" class="btn btn-gradient-primary me-2">
+                    <i class="mdi mdi-plus"></i> Yeni Siparis Ekle
+                </a>
+                <a href="@Url.Action("ExportPdf_SI", "Order")"
+                   class="btn btn-gradient-primary me-2">
+                    <i class="mdi mdi-content-save"></i> PDF Olustur
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+
+    <script type="text/javascript">
+        function confirmDelete(personelId) {
+            // SweetAlert confirmation
+            Swal.fire({
+                title: 'Silmek Istediginden Emin misin? ',
+                text: 'Bu islemi geri alamazsin!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Evet, Sil',
+                cancelButtonText: 'Hayir, iptal et'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If confirmed, navigate to the delete URL
+                    window.location.href = '/Order/Delete_SI/' + personelId;
+                }
+            });
+        }
+    </script>
+</body>
+</html> 

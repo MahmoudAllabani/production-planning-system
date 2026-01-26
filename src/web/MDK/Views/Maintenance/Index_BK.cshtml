@@ -1,0 +1,123 @@
+﻿@model IEnumerable<MDK.Models.Bakim>
+
+@{
+    ViewBag.Title = "Index_BK";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bakım Listesi</title>
+    <link rel="stylesheet" href="/purple/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/purple/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/purple/assets/css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Bakım Listesi</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Ad</th>
+                        <th>Başlangıç Tarihi</th>
+                        <th>Bitiş Tarihi</th>
+                        <th>Bakım Süresi (Dakika)</th>
+                        <th>Bakım Nedeni</th>
+                        <th>Bakım Durum</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Ad</td>
+                            <td>@(item.Baslangic_Tarihi?.ToString("dd/MM/yyyy HH:mm"))</td>
+                            <td>@(item.Bitis_Tarihi?.ToString("dd/MM/yyyy HH:mm"))</td>
+                            <td>@item.Bakim_Suresi</td>
+                            <td>@item.Bakim_Nedeni</td>
+                            @if (@item.Bitis_Tarihi < DateTime.Now)
+                            {
+                                <td>
+                                    <span class="mdi mdi-check-circle-outline" style="color:red; font-size:16px"></span>
+                                    <span style="color:red;"> Bitti</span>
+                                </td>
+                            }
+                            else if (@item.Bitis_Tarihi > DateTime.Now && item.Baslangic_Tarihi < DateTime.Now)
+                            {
+                                <td>
+                                    <span class="mdi mdi-reload" style="color: orange; font-size: 20px "></span>
+                                    <span style="color:orange;"> Islenir</span>
+                                </td>
+                            }
+                            else if (item.Baslangic_Tarihi > DateTime.Now)
+                            {
+                                <td>
+                                    <span class="mdi mdi-block-helper" style="color: green;"></span>
+                                    <span style="color:green;"> Waiting</span>
+                                </td>
+                            }
+                            <td>
+                                <div class="d-flex">
+                                    <button type="submit" class="btn btn-primary btn-sm btn-icon-split p-1 mx-1"
+                                            onclick="window.location.href = '/Maintenance/Details_BK/@item.Id'">
+                                        Görüntüle
+                                    </button>
+
+                                    <button type="submit" class="btn btn-gradient-warning btn-sm btn-icon-split p-1 mx-1"
+                                            onclick="window.location.href = '/Maintenance/Edit_BK/@item.Id'">
+                                        Düzenle
+                                    </button>
+
+                                    <button type="button"
+                                            class="btn btn-danger btn-sm btn-icon-split p-1 mx-1 pr-3 pl-3"
+                                            onclick="confirmDelete(@item.Id)">
+                                        Sil
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-between mt-4">
+                <a href="/Maintenance/Create_BK" class="btn btn-gradient-primary me-2">
+                    <i class="mdi mdi-plus"></i> Yeni Bakım Ekle
+                </a>
+                <a href="@Url.Action("ExportPdf_BK", "Maintenance")"
+                   class="btn btn-gradient-primary me-2">
+                    <i class="mdi mdi-content-save"></i> PDF Oluştur
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        function confirmDelete(bakimId) {
+            Swal.fire({
+                title: 'Silmek Istediginden Emin misin? ',
+                text: 'Bu işlemi geri alamazsın!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Evet, Sil',
+                cancelButtonText: 'Hayır, iptal et'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '/Maintenance/Delete_BK/' + bakimId;
+                }
+            });
+        }
+    </script>
+</body>
+</html>

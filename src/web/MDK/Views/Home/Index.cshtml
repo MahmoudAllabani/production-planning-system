@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Stok Takip</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js" integrity="sha512-v3ygConQmvH0QehvQa6gSvTE2VdBZ6wkLOlmK7Mcy2mZ0ZF9saNbbk19QeaoTHdWIEiTlWmrwAL4hS8ElnGFbA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    @{
+        ViewBag.Title = "Home Page";
+    }
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white me-2">
+                <i class="mdi mdi-home"></i>
+            </span> Home
+        </h3>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4 stretch-card grid-margin">
+            <div class="card bg-gradient-danger card-img-holder text-white">
+                <div class="card-body">
+                    <img src="/purple/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                    <h2 class="mb-3">PERSONEL</h2>
+                    <h4 class="font-weight-normal mb-3">
+                        Ortalama Maaş <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                    </h4>
+                    <h3 class="mb-5">@ViewBag.OrtalamaMaas TL</h3>
+                    <h6 class="card-text">Toplam Personel : @ViewBag.PersonelSayisi</h6>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 stretch-card grid-margin">
+            <div class="card bg-gradient-info card-img-holder text-white">
+                <div class="card-body">
+                    <h2 class="mb-3">KATEGORİ</h2>
+                    <img src="/purple/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                    <h4 class="font-weight-normal mb-3">
+                        Toplam kategori <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                    </h4>
+                    <h3 class="mb-5">@ViewBag.KategoriSayisi</h3>
+                    <h6 class="card-text">Toplam Urun : @ViewBag.UrunSayisi</h6>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 stretch-card grid-margin">
+            <div class="card bg-gradient-success card-img-holder text-white">
+                <div class="card-body">
+                    <h2 class="mb-3">FABRİKA</h2>
+                    <img src="/purple/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                    <h4 class="font-weight-normal mb-3">
+                        Toplam Kapasite <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                    </h4>
+                    <h3 class="mb-5">@ViewBag.FabrikaKapasitesi</h3>
+                    <h6 class="card-text">Ham Madde : @ViewBag.HamMaddeSayisi</h6>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">SON HİZMET ALAN MÜŞTERİLERİMİZ</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <i class="mdi mdi-chart-arc mdi-24px float-right"></i>
+                                        <i class="mdi mdi-chart-arc mdi-24px float-right"></i>
+                                    </th>
+                                    <th> <h4>NO</h4> </th>
+                                    <th></th>
+                                    <th> <h4>AD</h4> </th>
+                                    <th> <h4>SOYAD</h4> </th>
+                                    <th> <h4>TELEFON</h4> </th>
+                                    <th> <h4>GMAİL</h4> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var musteri in ViewBag.Son5Musteri)
+                                {
+                                    <tr>
+                                        <td></td>
+                                        <td><h6>@musteri.Id</h6></td>
+                                        <td></td>
+                                        <td><h6>@musteri.Ad</h6></td>
+                                        <td><h6>@musteri.Soyad</h6></td>
+                                        <td><h6>@musteri.Telefon.Telefon_No</h6></td>
+                                        <td><h6>@musteri.Gmail.Gmail1</h6></td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td><h4>TOPLAM MÜŞTERİ SAYISI</h4></td>
+                                    <td><h6>@ViewBag.MusteriSayisi</h6></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-7 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">SON ÜRETİLEN ÜRNLERİMİZ</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th> <h4>NO</h4> </th>
+                                    <th> <h4>ÜRÜN ADİ</h4> </th>
+                                    <th> <h4>KATEGORİ</h4> </th>
+                                    <th> <h4>BARKOD</h4> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var urun in ViewBag.Son5Urun)
+                                {
+                                    <tr role="row" class="odd">
+                                        <td><h6>@urun.Id</h6></td>
+                                        <td><h6>@urun.Urun_Ad</h6></td>
+                                        <td><h6>@urun.Kategori.Kategori1</h6></td>
+                                        <td><h6>@urun.Barkod</h6></td>
+                                        <td><i class="mdi mdi-chart-bar mdi-18px float-right"></i></td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td><h4>TOPLAM ÜRÜN SAYISI</h4></td>
+                                    <td><h6>@ViewBag.UrunSayisi</h6></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+
+                    <h4 class="card-title">SON SİPARİŞLERİMİZ</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th> <h4>NO</h4> </th>
+                                    <th> <h4>MÜŞTERİ</h4> </th>
+                                    <th> <h4>TESLİMAT</h4> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var siparis in ViewBag.Son5Siparis)
+                                {
+                                    <tr role="row" class="odd">
+                                        <td><h6>@siparis.Id</h6></td>
+                                        <td><h6>@siparis.Musteri.Ad-@siparis.Musteri.Soyad </h6></td>
+                                        <td><h6>@siparis.Teslim_Tarihi</h6></td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td><h4>TOPLAM SİPARİŞ SAYISI</h4></td>
+                                    <td><h6>@ViewBag.SiparisSayisi</h6></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+

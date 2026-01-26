@@ -1,0 +1,111 @@
+﻿﻿@model MDK.Models.Bakim
+
+@{
+    ViewBag.Title = "Create_BK";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bakım Ekleme</title>
+    <link rel="stylesheet" href="/purple/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/purple/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/purple/assets/css/style.css" />
+    <script>
+        function calculateEndTime() {
+            const startTimeInput = document.getElementById('Baslangic_Tarihi');
+            const durationInput = document.getElementById('Bakim_Suresi');
+            const endTimeInput = document.getElementById('Bitis_Tarihi');
+
+            if (startTimeInput.value && durationInput.value) {
+                const startTime = new Date(startTimeInput.value);
+                const duration = parseInt(durationInput.value);
+
+                if (!isNaN(duration) && duration > 0) {
+                    const endTime = new Date(startTime.getTime() + duration * 60000);
+
+                    // Format to match datetime-local input format (yyyy-mm-ddThh:mm)
+                    const formattedEndTime = formatToDatetimeLocal(endTime);
+                    endTimeInput.value = formattedEndTime;
+                } else {
+                    endTimeInput.value = startTimeInput.value;
+                }
+            } else {
+                endTimeInput.value = startTimeInput.value;
+            }
+        }
+
+        function formatToDatetimeLocal(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+
+            return `${year}-${month}-${day}T${hours}:${minutes}`;
+        }
+
+        // Attach event listeners
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('Baslangic_Tarihi').addEventListener('change', calculateEndTime);
+            document.getElementById('Bakim_Suresi').addEventListener('input', calculateEndTime);
+
+            // Trigger calculation on page load if values exist
+            calculateEndTime();
+        });
+    </script>
+</head>
+
+<body>
+    <div class="col-md-8 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Bakım Bilgileri Ekleme</h4>
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger">
+                        @Html.Raw(TempData["ErrorMessage"])
+                    </div>
+                }
+
+                <form action="/Maintenance/Create_BK" method="post" class="forms-sample">
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="Ad">Ad</label>
+                            <input type="text" class="form-control" id="Ad" name="Ad" placeholder="Bakım Adı" required />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="Baslangic_Tarihi">Başlangıç Tarihi</label>
+                            <input type="datetime-local" class="form-control" id="Baslangic_Tarihi" name="Baslangic_Tarihi" required />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Bakim_Suresi">Bakım Süresi (Dakika)</label>
+                            <input type="number" class="form-control" id="Bakim_Suresi" name="Bakim_Suresi" placeholder="Dakika sayısı" min="1" required />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="Bitis_Tarihi">Bitiş Zamanı</label>
+                            <input type="datetime-local" class="form-control" id="Bitis_Tarihi" name="Bitis_Tarihi" readonly style="background-color: #f2f2f2;" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Bakim_Nedeni">Bakım Nedeni</label>
+                            <textarea class="form-control" id="Bakim_Nedeni" name="Bakim_Nedeni" rows="3" required></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-gradient-primary me-2">Ekle</button>
+                    <a href="/Maintenance/Index_BK" class="btn btn-light">İptal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

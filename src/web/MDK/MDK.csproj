@@ -1,0 +1,678 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\Microsoft.ML.Mkl.Redist.4.0.2\build\netstandard2.0\Microsoft.ML.Mkl.Redist.props" Condition="Exists('packages\Microsoft.ML.Mkl.Redist.4.0.2\build\netstandard2.0\Microsoft.ML.Mkl.Redist.props')" />
+  <Import Project="packages\Microsoft.ML.4.0.2\build\netstandard2.0\Microsoft.ML.props" Condition="Exists('packages\Microsoft.ML.4.0.2\build\netstandard2.0\Microsoft.ML.props')" />
+  <Import Project="packages\Microsoft.ML.CpuMath.4.0.2\build\netstandard2.0\Microsoft.ML.CpuMath.props" Condition="Exists('packages\Microsoft.ML.CpuMath.4.0.2\build\netstandard2.0\Microsoft.ML.CpuMath.props')" />
+  <Import Project="packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{47855B91-8331-4EDD-8A74-8FB05897EEDA}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MDK</RootNamespace>
+    <AssemblyName>MDK</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44377</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BCrypt.Net-Next, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>packages\BCrypt.Net-Next.4.0.3\lib\net472\BCrypt.Net-Next.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.Numerics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.Numerics.8.0.0\lib\net462\Microsoft.Bcl.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ML.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ML.4.0.2\lib\netstandard2.0\Microsoft.ML.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ML.CpuMath, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ML.CpuMath.4.0.2\lib\netstandard2.0\Microsoft.ML.CpuMath.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ML.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ML.4.0.2\lib\netstandard2.0\Microsoft.ML.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ML.DataView, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ML.DataView.4.0.2\lib\netstandard2.0\Microsoft.ML.DataView.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ML.FastTree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ML.FastTree.4.0.2\lib\netstandard2.0\Microsoft.ML.FastTree.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ML.KMeansClustering, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ML.4.0.2\lib\netstandard2.0\Microsoft.ML.KMeansClustering.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ML.PCA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ML.4.0.2\lib\netstandard2.0\Microsoft.ML.PCA.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ML.StandardTrainers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ML.4.0.2\lib\netstandard2.0\Microsoft.ML.StandardTrainers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ML.TimeSeries, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ML.TimeSeries.4.0.2\lib\netstandard2.0\Microsoft.ML.TimeSeries.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ML.Transforms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ML.4.0.2\lib\netstandard2.0\Microsoft.ML.Transforms.dll</HintPath>
+    </Reference>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.6.0\lib\net462\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.CodeDom, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.CodeDom.8.0.0\lib\net462\System.CodeDom.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Collections.Immutable.8.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.6.0\lib\net462\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Tensors, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Tensors.8.0.0\lib\net462\System.Numerics.Tensors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics.Vectors, Version=4.1.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.6.0\lib\net462\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Channels, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Channels.8.0.0\lib\net462\System.Threading.Channels.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Mvc.5.3.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Razor.3.3.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MaintenanceController.cs" />
+    <Compile Include="Controllers\MaterialController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\PredictionController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\StockController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ML\MLModel\ModelInputProcessed.cs" />
+    <Compile Include="ML\MLModel\ModelOutput.cs" />
+    <Compile Include="ML\Services\DemandPredictor.cs" />
+    <Compile Include="Models\Adres.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ayarlar.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Bakim.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Birim.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Gmail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ham_Madde.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Kategori.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Musteri.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Personel.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Recete.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Siparis.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Stok.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Stok_Optimizasyonu.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Talep_Tahmini.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tc_Bilgileri.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Telefon.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Urun.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\auth\js\login.js" />
+    <Content Include="Content\auth\logo\logo.png" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\jquery-ui.min.css" />
+    <Content Include="Content\css\loader.css" />
+    <Content Include="Content\css\my-login.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\fonts\fa-solid-900.svg" />
+    <Content Include="Content\fonts\Pe-icon-7-stroke.svg" />
+    <Content Include="Content\images\loading.gif" />
+    <Content Include="Content\images\login-logo.png" />
+    <Content Include="Content\images\logo-inverse.png" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\js\jquery-ui.min.js" />
+    <Content Include="Content\js\loader.js" />
+    <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\my-login.js" />
+    <Content Include="Content\js\sweetalert2.all.min.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Models\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="purple\.gitignore" />
+    <Content Include="purple\assets\css\style.css" />
+    <Content Include="purple\assets\images\dashboard\circle.png" />
+    <Content Include="purple\assets\images\dashboard\circle.svg" />
+    <Content Include="purple\assets\images\dashboard\img_1.jpg" />
+    <Content Include="purple\assets\images\dashboard\img_2.jpg" />
+    <Content Include="purple\assets\images\dashboard\img_3.jpg" />
+    <Content Include="purple\assets\images\dashboard\img_4.jpg" />
+    <Content Include="purple\assets\images\faces-clipart\pic-1.png" />
+    <Content Include="purple\assets\images\faces-clipart\pic-2.png" />
+    <Content Include="purple\assets\images\faces-clipart\pic-3.png" />
+    <Content Include="purple\assets\images\faces-clipart\pic-4.png" />
+    <Content Include="purple\assets\images\faces\face1.jpg" />
+    <Content Include="purple\assets\images\faces\face10.jpg" />
+    <Content Include="purple\assets\images\faces\face11.jpg" />
+    <Content Include="purple\assets\images\faces\face12.jpg" />
+    <Content Include="purple\assets\images\faces\face13.jpg" />
+    <Content Include="purple\assets\images\faces\face14.jpg" />
+    <Content Include="purple\assets\images\faces\face15.jpg" />
+    <Content Include="purple\assets\images\faces\face16.jpg" />
+    <Content Include="purple\assets\images\faces\face17.jpg" />
+    <Content Include="purple\assets\images\faces\face18.jpg" />
+    <Content Include="purple\assets\images\faces\face19.jpg" />
+    <Content Include="purple\assets\images\faces\face2.jpg" />
+    <Content Include="purple\assets\images\faces\face20.jpg" />
+    <Content Include="purple\assets\images\faces\face21.jpg" />
+    <Content Include="purple\assets\images\faces\face22.jpg" />
+    <Content Include="purple\assets\images\faces\face23.jpg" />
+    <Content Include="purple\assets\images\faces\face24.jpg" />
+    <Content Include="purple\assets\images\faces\face25.jpg" />
+    <Content Include="purple\assets\images\faces\face26.jpg" />
+    <Content Include="purple\assets\images\faces\face27.jpg" />
+    <Content Include="purple\assets\images\faces\face3.jpg" />
+    <Content Include="purple\assets\images\faces\face4.jpg" />
+    <Content Include="purple\assets\images\faces\face5.jpg" />
+    <Content Include="purple\assets\images\faces\face6.jpg" />
+    <Content Include="purple\assets\images\faces\face7.jpg" />
+    <Content Include="purple\assets\images\faces\face8.jpg" />
+    <Content Include="purple\assets\images\faces\face9.jpg" />
+    <Content Include="purple\assets\images\favicon.ico" />
+    <Content Include="purple\assets\images\favicon.png" />
+    <Content Include="purple\assets\images\logo-mini.svg" />
+    <Content Include="purple\assets\images\logo.svg" />
+    <Content Include="purple\assets\images\logo4.svg" />
+    <Content Include="purple\assets\images\sprites\blue.png" />
+    <Content Include="purple\assets\images\sprites\dark.png" />
+    <Content Include="purple\assets\images\sprites\flag.png" />
+    <Content Include="purple\assets\images\sprites\green.png" />
+    <Content Include="purple\assets\images\sprites\jsgrid-icons.png" />
+    <Content Include="purple\assets\images\sprites\red.png" />
+    <Content Include="purple\assets\images\sprites\yellow.png" />
+    <Content Include="purple\assets\js\chart.js" />
+    <Content Include="purple\assets\js\dashboard.js" />
+    <Content Include="purple\assets\js\file-upload.js" />
+    <Content Include="purple\assets\js\hoverable-collapse.js" />
+    <Content Include="purple\assets\js\jquery.cookie.js" />
+    <Content Include="purple\assets\js\misc.js" />
+    <Content Include="purple\assets\js\off-canvas.js" />
+    <Content Include="purple\assets\js\todo.js" />
+    <Content Include="purple\assets\js\todolist.js" />
+    <Content Include="purple\assets\vendors\chart.js\Chart.min.js" />
+    <Content Include="purple\assets\vendors\css\vendor.bundle.base.css" />
+    <Content Include="purple\assets\vendors\js\vendor.bundle.base.js" />
+    <Content Include="purple\assets\vendors\mdi\css\materialdesignicons.min.css" />
+    <Content Include="purple\excel-print.css" />
+    <Content Include="purple\gulp-tasks\inject.js" />
+    <Content Include="purple\gulp-tasks\serve.js" />
+    <Content Include="purple\gulp-tasks\vendors.js" />
+    <Content Include="purple\gulpfile.js" />
+    <Content Include="purple\index.html" />
+    <Content Include="purple\pages\charts\chartjs.html" />
+    <Content Include="purple\pages\forms\basic_elements.html" />
+    <Content Include="purple\pages\icons\mdi.html" />
+    <Content Include="purple\pages\samples\blank-page.html" />
+    <Content Include="purple\pages\samples\error-404.html" />
+    <Content Include="purple\pages\samples\error-500.html" />
+    <Content Include="purple\pages\samples\login.html" />
+    <Content Include="purple\pages\samples\register.html" />
+    <Content Include="purple\pages\tables\basic-table.html" />
+    <Content Include="purple\pages\ui-features\buttons.html" />
+    <Content Include="purple\pages\ui-features\typography.html" />
+    <Content Include="purple\partials\_footer.html" />
+    <Content Include="purple\partials\_navbar.html" />
+    <Content Include="purple\partials\_sidebar.html" />
+    <Content Include="purple\screenshot.jpg" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\fonts\fa-solid-900.eot" />
+    <Content Include="Content\fonts\fa-solid-900.ttf" />
+    <Content Include="Content\fonts\fa-solid-900.woff" />
+    <Content Include="Content\fonts\fa-solid-900.woff2" />
+    <Content Include="Content\fonts\Pe-icon-7-stroke.eot" />
+    <Content Include="Content\fonts\Pe-icon-7-stroke.ttf" />
+    <Content Include="Content\fonts\Pe-icon-7-stroke.woff" />
+    <Content Include="purple\.DS_Store" />
+    <Content Include="purple\assets\css\style.css.map" />
+    <Content Include="purple\assets\fonts\Ubuntu\Ubuntu-Bold.eot" />
+    <Content Include="purple\assets\fonts\Ubuntu\Ubuntu-Bold.ttf" />
+    <Content Include="purple\assets\fonts\Ubuntu\Ubuntu-Bold.woff" />
+    <Content Include="purple\assets\fonts\Ubuntu\Ubuntu-Bold.woff2" />
+    <Content Include="purple\assets\fonts\Ubuntu\Ubuntu-Light.eot" />
+    <Content Include="purple\assets\fonts\Ubuntu\Ubuntu-Light.ttf" />
+    <Content Include="purple\assets\fonts\Ubuntu\Ubuntu-Light.woff" />
+    <Content Include="purple\assets\fonts\Ubuntu\Ubuntu-Light.woff2" />
+    <Content Include="purple\assets\fonts\Ubuntu\Ubuntu-Medium.eot" />
+    <Content Include="purple\assets\fonts\Ubuntu\Ubuntu-Medium.ttf" />
+    <Content Include="purple\assets\fonts\Ubuntu\Ubuntu-Medium.woff" />
+    <Content Include="purple\assets\fonts\Ubuntu\Ubuntu-Medium.woff2" />
+    <Content Include="purple\assets\fonts\Ubuntu\Ubuntu-Regular.eot" />
+    <Content Include="purple\assets\fonts\Ubuntu\Ubuntu-Regular.ttf" />
+    <Content Include="purple\assets\fonts\Ubuntu\Ubuntu-Regular.woff" />
+    <Content Include="purple\assets\fonts\Ubuntu\Ubuntu-Regular.woff2" />
+    <Content Include="purple\assets\scss\components\_badges.scss" />
+    <Content Include="purple\assets\scss\components\_bootstrap-progress.scss" />
+    <Content Include="purple\assets\scss\components\_breadcrumbs.scss" />
+    <Content Include="purple\assets\scss\components\_buttons.scss" />
+    <Content Include="purple\assets\scss\components\_cards.scss" />
+    <Content Include="purple\assets\scss\components\_checkbox-radio.scss" />
+    <Content Include="purple\assets\scss\components\_dropdown.scss" />
+    <Content Include="purple\assets\scss\components\_forms.scss" />
+    <Content Include="purple\assets\scss\components\_icons.scss" />
+    <Content Include="purple\assets\scss\components\_lists.scss" />
+    <Content Include="purple\assets\scss\components\_preview.scss" />
+    <Content Include="purple\assets\scss\components\_tables.scss" />
+    <Content Include="purple\assets\scss\components\_todo-list.scss" />
+    <Content Include="purple\assets\scss\landing-screens\_auth.scss" />
+    <Content Include="purple\assets\scss\mixins\_animation.scss" />
+    <Content Include="purple\assets\scss\mixins\_background.scss" />
+    <Content Include="purple\assets\scss\mixins\_badges.scss" />
+    <Content Include="purple\assets\scss\mixins\_blockqoute.scss" />
+    <Content Include="purple\assets\scss\mixins\_breadcrumbs.scss" />
+    <Content Include="purple\assets\scss\mixins\_buttons.scss" />
+    <Content Include="purple\assets\scss\mixins\_cards.scss" />
+    <Content Include="purple\assets\scss\mixins\_misc.scss" />
+    <Content Include="purple\assets\scss\mixins\_pagination.scss" />
+    <Content Include="purple\assets\scss\mixins\_popovers.scss" />
+    <Content Include="purple\assets\scss\mixins\_text.scss" />
+    <Content Include="purple\assets\scss\mixins\_tooltips.scss" />
+    <Content Include="purple\assets\scss\style.scss" />
+    <Content Include="purple\assets\scss\_dashboard.scss" />
+    <Content Include="purple\assets\scss\_demo.scss" />
+    <Content Include="purple\assets\scss\_fonts.scss" />
+    <Content Include="purple\assets\scss\_footer.scss" />
+    <Content Include="purple\assets\scss\_functions.scss" />
+    <Content Include="purple\assets\scss\_layouts.scss" />
+    <Content Include="purple\assets\scss\_misc.scss" />
+    <Content Include="purple\assets\scss\_navbar.scss" />
+    <Content Include="purple\assets\scss\_reset.scss" />
+    <Content Include="purple\assets\scss\_sidebar.scss" />
+    <Content Include="purple\assets\scss\_typography.scss" />
+    <Content Include="purple\assets\scss\_utilities.scss" />
+    <Content Include="purple\assets\scss\_variables.scss" />
+    <Content Include="purple\assets\scss\_vertical-wrapper.scss" />
+    <Content Include="purple\assets\scss\_widget-grid.scss" />
+    <Content Include="purple\assets\vendors\js\bootstrap.min.js.map" />
+    <Content Include="purple\assets\vendors\mdi\css\materialdesignicons.min.css.map" />
+    <Content Include="purple\assets\vendors\mdi\fonts\materialdesignicons-webfont.eot" />
+    <Content Include="purple\assets\vendors\mdi\fonts\materialdesignicons-webfont.ttf" />
+    <Content Include="purple\assets\vendors\mdi\fonts\materialdesignicons-webfont.woff" />
+    <Content Include="purple\assets\vendors\mdi\fonts\materialdesignicons-webfont.woff2" />
+    <Content Include="purple\CHANGELOG.md" />
+    <Content Include="purple\LICENSE" />
+    <Content Include="purple\package.json" />
+    <Content Include="purple\PSD\Purple_dashboard_free.psd" />
+    <Content Include="purple\README.md" />
+    <Content Include="App_Browsers\qt.browser" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\MDK.csdl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\MDK.msl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\MDK.ssdl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\Model1.csdl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\Model1.msl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\Model1.ssdl" />
+    <Content Include="obj\Debug\MDK.csproj.AssemblyReference.cache" />
+    <Content Include="obj\Debug\MDK.csproj.CoreCompileInputs.cache" />
+    <Content Include="obj\Debug\MDK.csproj.Up2Date" />
+    <Content Include="obj\Release\MDK.csproj.AssemblyReference.cache" />
+    <Content Include="App_Data\DemandPredictionModel.zip" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Scripts\jquery-3.7.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.1.js" />
+    <Content Include="Scripts\jquery-3.7.1.min.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Material\Index_M.cshtml" />
+    <Content Include="Views\Material\Create_M.cshtml" />
+    <Content Include="Views\Material\IndexError_M.cshtml" />
+    <Content Include="Views\Material\Edit_M.cshtml" />
+    <Content Include="Views\Product\urun_listele_P.cshtml" />
+    <Content Include="Views\Product\urun_ekle_P.cshtml" />
+    <Content Include="Views\Product\urun_detaylari_P.cshtml" />
+    <Content Include="Views\Stock\Index_S.cshtml" />
+    <Content Include="Views\Stock\IndexError_S.cshtml" />
+    <Content Include="Views\Stock\Create_S.cshtml" />
+    <Content Include="Views\Stock\Edit_S.cshtml" />
+    <Content Include="Views\Category\Create_C.cshtml" />
+    <Content Include="Views\Category\Index_C.cshtml" />
+    <Content Include="Views\Category\Edit_C.cshtml" />
+    <Content Include="Views\Product\edit_P.cshtml" />
+    <Content Include="Views\Customer\Index_MU.cshtml" />
+    <Content Include="Views\Customer\Details_MU.cshtml" />
+    <Content Include="Views\Customer\Create_MU.cshtml" />
+    <Content Include="Views\Customer\Edit_MU.cshtml" />
+    <Content Include="Views\Employee\Index_EM.cshtml" />
+    <Content Include="Views\Employee\Details_EM.cshtml" />
+    <Content Include="Views\Employee\Create_EM.cshtml" />
+    <Content Include="Views\Employee\Edit_EM.cshtml" />
+    <Content Include="Views\Settings\Index_Se.cshtml" />
+    <Content Include="Views\Settings\Edit_Se.cshtml" />
+    <Content Include="Views\Auth\Login.cshtml" />
+    <Content Include="Views\Auth\Newpassword.cshtml" />
+    <Content Include="Views\Auth\LoginError.cshtml" />
+    <Content Include="Views\Maintenance\Create_BK.cshtml" />
+    <Content Include="Views\Maintenance\Details_BK.cshtml" />
+    <Content Include="Views\Maintenance\Edit_BK.cshtml" />
+    <Content Include="Views\Maintenance\Index_BK.cshtml" />
+    <Content Include="Views\Order\Create_SI.cshtml" />
+    <Content Include="Views\Order\Details_SI.cshtml" />
+    <Content Include="Views\Order\Edit_SI.cshtml" />
+    <Content Include="Views\Order\Index_SI.cshtml" />
+    <Content Include="Views\Prediction\Predict.cshtml" />
+    <Content Include="Views\Prediction\Predictions.cshtml" />
+    <Content Include="Views\Order\Completed_SI.cshtml" />
+    <Content Include="Views\Order\Deleted_SI.cshtml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.7.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>56140</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44377/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('packages\Microsoft.ML.CpuMath.4.0.2\build\netstandard2.0\Microsoft.ML.CpuMath.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.ML.CpuMath.4.0.2\build\netstandard2.0\Microsoft.ML.CpuMath.props'))" />
+    <Error Condition="!Exists('packages\Microsoft.ML.4.0.2\build\netstandard2.0\Microsoft.ML.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.ML.4.0.2\build\netstandard2.0\Microsoft.ML.props'))" />
+    <Error Condition="!Exists('packages\Microsoft.ML.4.0.2\build\netstandard2.0\Microsoft.ML.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.ML.4.0.2\build\netstandard2.0\Microsoft.ML.targets'))" />
+    <Error Condition="!Exists('packages\Microsoft.ML.Mkl.Redist.4.0.2\build\netstandard2.0\Microsoft.ML.Mkl.Redist.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.ML.Mkl.Redist.4.0.2\build\netstandard2.0\Microsoft.ML.Mkl.Redist.props'))" />
+  </Target>
+  <Import Project="packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
+  <Import Project="packages\Microsoft.ML.4.0.2\build\netstandard2.0\Microsoft.ML.targets" Condition="Exists('packages\Microsoft.ML.4.0.2\build\netstandard2.0\Microsoft.ML.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,89 @@
+﻿@model MDK.Models.Bakim
+
+@{
+    ViewBag.Title = "Details_BK";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bakım Detayları</title>
+    <link rel="stylesheet" href="/purple/assets/vendors/mdi/css/materialdesignicons.min.css" />
+    <link rel="stylesheet" href="/purple/assets/vendors/css/vendor.bundle.base.css" />
+    <link rel="stylesheet" href="/purple/assets/css/style.css" />
+    <style>
+        .form-control,
+        .form-control:disabled,
+        .form-control[disabled] {
+            background-color: white !important;
+            border: 1px solid #ebedf2 !important;
+            border-radius: 4px;
+        }
+
+        textarea.form-control {
+            background-color: white !important;
+            border: 1px solid #ebedf2 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="col-md-8 grid-margin stretch-card">
+        <div class="card" style="background-color: transparent; box-shadow: none;">
+            <div class="card-body" style="padding: 0;">
+                <h4 class="card-title mb-5">Bakım Detayları</h4>
+
+                <div class="mt-4">
+                    <form class="forms-sample">
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Id" class="form-label">Bakım Kodu</label>
+                                <input type="text" class="form-control" id="Id" value="@Model.Id" disabled />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Ad" class="form-label">Ad</label>
+                                <input type="text" class="form-control" id="Ad" value="@Model.Ad" disabled />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Baslangic_Tarihi" class="form-label">Başlangıç Tarihi</label>
+                                <input type="text" class="form-control" id="Baslangic_Tarihi" value="@(Model.Baslangic_Tarihi?.ToString("dd/MM/yyyy HH:mm"))" disabled />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Bitis_Tarihi" class="form-label">Bitiş Tarihi</label>
+                                <input type="text" class="form-control" id="Bitis_Tarihi" value="@(Model.Bitis_Tarihi?.ToString("dd/MM/yyyy HH:mm"))" disabled />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Bakim_Suresi" class="form-label">Bakım Süresi (Dakika)</label>
+                                <input type="text" class="form-control" id="Bakim_Suresi" value="@Model.Bakim_Suresi" disabled />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Bakim_Nedeni" class="form-label">Bakım Nedeni</label>
+                                <textarea class="form-control" id="Bakim_Nedeni" disabled>@Model.Bakim_Nedeni</textarea>
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="window.history.back()" class="btn btn-gradient-primary me-2">Geri Dön</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

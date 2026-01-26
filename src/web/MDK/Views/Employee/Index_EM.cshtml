@@ -1,0 +1,105 @@
+﻿@model IEnumerable<MDK.Models.Personel>
+
+@{
+    ViewBag.Title = "Index_EM";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musteri Listesi</title>
+    <link rel="stylesheet"
+          href="/purple/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet"
+          href="/purple/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/purple/assets/css/style.css" />
+
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+</head>
+
+<body style="position:relative !important;">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Personel Listesi</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Ad</th>
+                        <th>Soyad</th>
+                        <th>Telefon</th>
+                        <th>Detaylar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var personel in Model)
+                    {
+                        <tr>
+                            <td>@personel.Id</td>
+                            <td>@personel.Ad</td>
+                            <td>@personel.Soyad</td>
+                            <td>@personel.Telefon.Telefon_No</td>
+                            <td>
+                                <div class="d-flex">
+                                    <button type="submit" class="btn btn-primary btn-sm btn-icon-split p-1 mx-1"
+                                            onclick="window.location.href = '/Employee/Details_EM/@personel.Id'">
+                                        Görüntüle
+                                    </button>
+
+                                    <button type="submit" class="btn btn-gradient-warning btn-sm btn-icon-split p-1 mx-1"
+                                            onclick="window.location.href = '/Employee/Edit_EM/@personel.Id'">
+                                        Dunzenle
+                                    </button>
+
+                                    <button type="button"
+                                            class="btn btn-danger btn-sm btn-icon-split p-1 mx-1 pr-3 pl-3"
+                                            onclick="confirmDelete(@personel.Id)">
+                                        Sil
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-end mt-4">
+                <a href="@Url.Action("ExportPdf_EM", "Employee")"
+                   class="btn btn-gradient-primary me-2">
+                    <i class="mdi mdi-content-save"></i> PDF Oluştur
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+
+    <script type="text/javascript">
+        function confirmDelete(personelId) {
+            // SweetAlert confirmation
+            Swal.fire({
+                title: 'Silmek Istediginden Emin misin? ',
+                text: 'Bu işlemi geri alamazsın!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Evet, Sil',
+                cancelButtonText: 'Hayır, iptal et'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If confirmed, navigate to the delete URL
+                    window.location.href = '/Employee/Delete_EM/' + personelId;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+

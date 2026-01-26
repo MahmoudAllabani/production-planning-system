@@ -1,0 +1,111 @@
+﻿
+@model List<MDK.Models.Ayarlar>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urun Listesi</title>
+    <link rel="stylesheet"
+          href="~/purple/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet"
+          href="~/purple/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/purple/assets/css/style.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+
+<body>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Ayarlar</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Ayar Adı</th>
+                        <th>Ayar Değeri</th>
+                        <th>Detaylar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ayarlar in Model)
+                    {
+                        <tr role="row" class="odd">
+                            <td>
+                                @if (@ayarlar.Ad.TrimEnd() == "yonetici_ad")
+                                {
+                                    @Html.Raw("Yönetici Adı") }
+                                else if (@ayarlar.Ad.TrimEnd() == "yonetici_email")
+                                {
+                                    @Html.Raw("Yönetici Emaili") }
+                                else if (@ayarlar.Ad.TrimEnd() == "yonetici_sifre")
+                                {
+                                    @Html.Raw("Yönetici Şifresi") }
+                                else if (@ayarlar.Ad.TrimEnd() == "yonetici_tc")
+                                {
+                                    @Html.Raw("Yönetici TC Kimlik Numarası") }
+                                else if (@ayarlar.Ad.TrimEnd() == "yonetici_adres")
+                                {
+                                    @Html.Raw("Yönetici Adresi") }
+                                else if (@ayarlar.Ad.TrimEnd() == "yonetici_telefon")
+                                {
+                                    @Html.Raw("Yönetici Telefonu") }
+                                else if (@ayarlar.Ad.TrimEnd() == "fabrika_isim")
+                                {
+                                    @Html.Raw("Fabrika İsmi") }
+                                else if (@ayarlar.Ad.TrimEnd() == "fabrika_kapasite")
+                                {
+                                    @Html.Raw("Fabrika Kapasitesi") }
+                                else if (@ayarlar.Ad.TrimEnd() == "fabrika_personel_sayi")
+                                {
+                                    @Html.Raw("Fabrika Personel sayısı") }
+                                else if (@ayarlar.Ad.TrimEnd() == "fabrika_adres")
+                                {
+                                    @Html.Raw("Fabrika Adresi") }
+                                else if (@ayarlar.Ad.TrimEnd() == "fabrika_telefon")
+                                {
+                                    @Html.Raw("Fabrika Telefonu") }
+                                else
+                                {
+                                    @Html.Raw("Yönetici Adı")}
+                            </td>
+                            <td>
+                                @if (ayarlar.Ad.TrimEnd() == "yonetici_sifre")
+                                {
+                                    @Html.Raw("*********") }
+                                else
+                                {
+                                    @ayarlar.Deger}
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    @if (ayarlar.Ad.TrimEnd() == "yonetici_sifre")
+                                    {
+                                        <button type="submit" class="btn btn-gradient-danger btn-sm mx-0 pr-3 pl-3" onclick="window.location.href = '/Auth/Newpassword/'">
+                                            Şifreyi Değiştir
+                                        </button> }
+                                    else
+                                    {
+                                        <button type="button" class="btn btn-warning btn-sm"
+                                                onclick="location.href='@Url.Action("Edit_Se", "Settings", new { id = ayarlar.Id })'">
+                                            Düzenle
+                                        </button>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

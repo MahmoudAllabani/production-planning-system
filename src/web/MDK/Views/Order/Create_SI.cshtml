@@ -1,0 +1,97 @@
+@model IEnumerable<MDK.Models.Siparis>
+
+@{
+    ViewBag.Title = "Siparis Olustur";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var formData = TempData["FormData"] as Dictionary<string, object>;
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siparis Olustur</title>
+    <link rel="stylesheet" href="/purple/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/purple/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/purple/assets/css/style.css" />
+</head>
+<body>
+    <div class="col-md-8 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Siparis Olustur</h4>
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger">
+                        @Html.Raw(TempData["ErrorMessage"])
+                    </div>
+                }
+                <form action="/Order/Create_SI" method="post" class="forms-sample">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="musteri" class="form-label">Musteri</label>
+                            <select class="form-select" id="musteri" name="musteri" required>
+                                <option value="">Seciniz</option>
+                                @foreach (var musteri in ViewBag.customers)
+                                {
+                                    <option value="@musteri.Id" @(formData != null && formData.ContainsKey("musteri") && Convert.ToInt32(formData["musteri"]) == musteri.Id ? "selected" : "")>@musteri.Ad @musteri.Soyad</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="urun" class="form-label">urun</label>
+                            <select class="form-select" id="urun" name="urun" required>
+                                <option value="">Seciniz</option>
+                                @foreach (var urun in ViewBag.products)
+                                {
+                                    <option value="@urun.Id" data-kapasite="@urun.Fabrika_Kapasitesi" @(formData != null && formData.ContainsKey("urun") && Convert.ToInt32(formData["urun"]) == urun.Id ? "selected" : "")>@ViewBag.productDisplayNames[urun.Id]</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="miktar">Miktar</label>
+                            <input type="number" class="form-control" id="miktar" name="miktar" min="1" max="1000000" value="@(formData != null && formData.ContainsKey("miktar") ? formData["miktar"] : "")" required />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="mesai">Mesai Saati</label>
+                            <input type="number" class="form-control" id="mesai" name="mesai" min="0" max="15" value="@(formData != null && formData.ContainsKey("mesai") ? formData["mesai"] : "0")" required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="TTT">Teslim Tarihi</label>
+                            <input type="datetime-local" class="form-control" id="TTT" name="TTT" value="@(formData != null && formData.ContainsKey("TTT") ? formData["TTT"] : "")" required />
+                            <small id="tahminiTeslimTarihi" class="form-text text-muted"></small>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="calismaGunuTipi">calisma Gunu Tipi</label>
+                            <select class="form-select" id="calismaGunuTipi" name="calismaGunuTipi">
+                                @{
+                                    // Default to 6 days if not in formData or if formData value is not recognized
+                                    int selectedWorkingDays = 1; // Default to 6 days (Pazar is false/null)
+                                    if (formData != null && formData.ContainsKey("calismaGunuTipi"))
+                                    {
+                                        int parsedValue;
+                                        if (int.TryParse(formData["calismaGunuTipi"].ToString(), out parsedValue))
+                                        {
+                                            selectedWorkingDays = parsedValue;
+                                        }
+                                    }
+                                }
+                                <option value="0" @(selectedWorkingDays == 0 ? "selected" : "")>5 Gun (Pazartesi-Cuma)</option>
+                                <option value="1" @(selectedWorkingDays == 1 ? "selected" : "")>6 Gun (Pazartesi-Cumartesi)</option>
+                                <option value="2" @(selectedWorkingDays == 2 ? "selected" : "")>7 Gun (Pazartesi-Pazar)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-gradient-primary me-2">Olustur</button>
+                    <a href="/Order/Index_SI" class="btn btn-light">Iptal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

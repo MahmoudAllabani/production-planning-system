@@ -1,0 +1,115 @@
+﻿
+@model List<MDK.Models.Ham_Madde>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urun Listesi</title>
+    <link rel="stylesheet"
+          href="~/purple/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet"
+          href="~/purple/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/purple/assets/css/style.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="~/purple/excel-print.css" rel="stylesheet" media="print" />
+</head>
+
+
+<body>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title" style="font-size:20px">Hammade listesi</h4>
+            <br />
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <i class="mdi mdi-view-dashboard-variant mdi-24px float-right"></i>
+                            <i class="mdi mdi-chart-line-variant mdi-24px float-right"></i>
+                        </th>
+                        <th>No</th>
+                        <th>Hammadde adı</th>
+                        <th>Hammadde Birimi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var a in Model)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@a.Id</td>
+                            <td>@a.Ham_Madde1</td>
+                            <td>@(a.Birim != null ? a.Birim.Birim1 : "")</td>
+                            <td>
+                                <div class="d-flex mr-5">
+                                    <a href="@Url.Action("Edit_M", "Material", new { id = a.Id })"
+                                       class="btn btn-gradient-primary btn-sm mx-0">
+                                        Güncelle
+                                    </a>
+                                    @using (Html.BeginForm("Delete_M", "Material", FormMethod.Post, new { id = "deleteForm_" + a.Id }))
+                                    {
+                                        @Html.Hidden("id", a.Id)
+                                        <button type="button"
+                                                class="btn btn-gradient-danger btn-sm mx-1 pr-3 pl-3"
+                                                onclick="confirmDelete(@a.Id)">
+                                            Sil
+                                        </button>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-end mt-4">
+                <a href="@Url.Action("ExportPdf_M", "Material")"
+                   class="btn btn-gradient-primary me-2">
+                    <i class="mdi mdi-content-save"></i> PDF Oluştur
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Silmek Istediginden Emin misin?',
+            text: "Bu işlemi geri alamazsın!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Evet, Sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('deleteForm_' + id).submit();
+            }
+        });
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    window.onload = function () {
+        var success = '@TempData["Success"]' === 'True';
+        if (success) {
+            Swal.fire({
+                title: "Başarılı!",
+                text: "Hammadde başarıyla eklendi.",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 2000
+            });
+        }
+    };
+</script>

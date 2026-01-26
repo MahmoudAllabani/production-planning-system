@@ -1,0 +1,133 @@
+﻿@model MDK.Models.Personel
+
+@{
+    ViewBag.Title = "Details_EM";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personel Detayları</title>
+    <link rel="stylesheet" href="/purple/assets/vendors/mdi/css/materialdesignicons.min.css" />
+    <link rel="stylesheet" href="/purple/assets/vendors/css/vendor.bundle.base.css" />
+    <link rel="stylesheet" href="/purple/assets/css/style.css" />
+    <style>
+        .form-control,
+        .form-control:disabled,
+        .form-control[disabled] {
+            background-color: white !important;
+            border: 1px solid #ebedf2 !important;
+            border-radius: 4px;
+        }
+
+        textarea.form-control {
+            background-color: white !important;
+            border: 1px solid #ebedf2 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="col-md-8 grid-margin stretch-card">
+        <div class="card" style="background-color: transparent; box-shadow: none;">
+            <div class="card-body" style="padding: 0;">
+                <h4 class="card-title mb-5">Personel Detayları</h4>
+
+                <div class="mt-4">
+                    <form class="forms-sample">
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Id" class="form-label">Personel Kodu</label>
+                                <input type="text" class="form-control" id="Id" value="@Model.Id" disabled />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Ad" class="form-label">Ad</label>
+                                <input type="text" class="form-control" id="Ad" value="@Model.Ad" disabled />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Soyad" class="form-label">Soyad</label>
+                                <input type="text" class="form-control" id="Soyad" value="@Model.Soyad" disabled />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Gmail.Gmail1" class="form-label">E-Posta</label>
+                                <input type="text" class="form-control" id="Gmail.Gmail1" value="@Model.Gmail.Gmail1" disabled />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Adres.Adres_Bilgisi" class="form-label">Adres</label>
+                                <input type="text" class="form-control" id="Adres.Adres_Bilgisi" value="@Model.Adres.Adres_Bilgisi" disabled />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Tc_Bilgileri.Tc_No" class="form-label">TC No</label>
+                                <input type="text" class="form-control" id="Tc_Bilgileri.Tc_No" value="@Model.Tc_Bilgileri.Tc_No" disabled />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Telefon.Telefon_No" class="form-label">Telefon</label>
+                                <input type="text" class="form-control" id="Telefon.Telefon_No" value="@Model.Telefon.Telefon_No" disabled />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Yas" class="form-label">Yaş</label>
+                                <input type="text" class="form-control" id="Yas" value="@Model.Yas" disabled />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Maas" class="form-label">Maaş</label>
+                                <input type="text" class="form-control" id="Maas" value="@Model.Maas" disabled />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Medeni_Hal" class="form-label">Medeni Hal</label>
+                                <input type="text" class="form-control" id="Medeni_Hal" value="@Model.Medeni_Durumu" disabled />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Cinsiyet" class="form-label">Cinsiyet</label>
+                                <input type="text" class="form-control" id="Cinsiyet" value="@(Model.Cinsiyet.HasValue ? (Model.Cinsiyet.Value ? "Erkek" : "Kadın") : "Belirtilmemiş")" disabled />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Cocuk_Sayisi" class="form-label">Çocuk Sayısı</label>
+                                <input type="text" class="form-control" id="Cocuk_Sayisi" value="@Model.Cocuk_Sayisi" disabled />
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="window.history.back()" class="btn btn-gradient-primary me-2">Geri Dön</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+﻿@model MDK.Models.Urun
+
+@{
+    ViewBag.Title = "Urun Duzelt";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ürün Düzenleme</title>
+    <link rel="stylesheet" href="/purple/assets/vendors/mdi/css/materialdesignicons.min.css" />
+    <link rel="stylesheet" href="/purple/assets/vendors/css/vendor.bundle.base.css" />
+    <link rel="stylesheet" href="/purple/assets/css/style.css" />
+</head>
+<body>
+    <div class="col-md-8 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-5">Ürün Düzenleme</h4>
+
+                @using (Html.BeginForm("Edit_P", "Product", FormMethod.Post, new { @class = "forms-sample" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.Id)
+
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="UrunAd" class="form-label">Ürün Adı</label>
+                            @Html.TextBoxFor(m => m.Urun_Ad, new { @class = "form-control", id = "UrunAd" })
+                            @Html.ValidationMessageFor(m => m.Urun_Ad, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="Barkod" class="form-label">Barkod Numarası</label>
+                            @Html.TextBoxFor(m => m.Barkod, new { @class = "form-control", id = "Barkod" })
+                            @Html.ValidationMessageFor(m => m.Barkod, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="KategoriSelect" class="form-label">Kategori</label>
+                            <select id="KategoriSelect" name="Kategori_FK" class="form-select" required>
+                                <option value="">Seçiniz</option>
+                                @foreach (var kategori in ViewBag.KategoriList as IEnumerable<SelectListItem>)
+                                {
+                                    <option value="@kategori.Value" @(kategori.Selected ? "selected" : "")>@kategori.Text</option>
+                                }
+                            </select>
+                            @Html.ValidationMessageFor(m => m.Kategori_FK, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="BirimSelect" class="form-label">Birim</label>
+                            <select id="BirimSelect" name="Birim_FK" class="form-select" required>
+                                <option value="">Seçiniz</option>
+                                @foreach (var birim in ViewBag.BirimList as IEnumerable<SelectListItem>)
+                                {
+                                    <option value="@birim.Value" @(birim.Selected ? "selected" : "")>@birim.Text</option>
+                                }
+                            </select>
+                            @Html.ValidationMessageFor(m => m.Birim_FK, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="Tanim" class="form-label">Tanım</label>
+                            @Html.TextAreaFor(m => m.Tanim, new { @class = "form-control overflow-auto", id = "Tanim", style = "height: 100px;" })
+                            @Html.ValidationMessageFor(m => m.Tanim, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="KaliteRaporu" class="form-label">Kalite Raporu</label>
+                            @Html.TextAreaFor(m => m.Kalite_Raporu, new { @class = "form-control overflow-auto", id = "KaliteRaporu", style = "height: 100px;" })
+                            @Html.ValidationMessageFor(m => m.Kalite_Raporu, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="FabrikaKapasitesi" class="form-label">Fabrika Kapasitesi</label>
+                            @Html.TextBoxFor(m => m.Fabrika_Kapasitesi, new { @class = "form-control", id = "FabrikaKapasitesi" })
+                            @Html.ValidationMessageFor(m => m.Fabrika_Kapasitesi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-gradient-primary me-2">Güncelle</button>
+                    <a href="@Url.Action("Index_P", "Product")" class="btn btn-light">İptal</a>
+                }
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

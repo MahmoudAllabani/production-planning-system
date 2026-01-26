@@ -1,0 +1,82 @@
+@model MDK.Models.Siparis
+
+@{
+    ViewBag.Title = "Sipariş Detayları";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sipariş Detayları</title>
+    <link rel="stylesheet" href="/purple/assets/vendors/mdi/css/materialdesignicons.min.css" />
+    <link rel="stylesheet" href="/purple/assets/vendors/css/vendor.bundle.base.css" />
+    <link rel="stylesheet" href="/purple/assets/css/style.css" />
+    <style>
+        .form-control,
+        .form-control:disabled,
+        .form-control[disabled] {
+            background-color: white !important;
+            border: 1px solid #ebedf2 !important;
+            border-radius: 4px;
+        }
+
+        textarea.form-control {
+            background-color: white !important;
+            border: 1px solid #ebedf2 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="col-md-8 grid-margin stretch-card">
+        <div class="card" style="background-color: transparent; box-shadow: none;">
+            <div class="card-body" style="padding: 0;">
+                <h4 class="card-title mb-5">Siparis Detay</h4>
+                <div class="mt-4">
+                    <form class="forms-sample">
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label">Siparis No</label>
+                                <input type="text" class="form-control" value="@Model.Id" disabled />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label">Musteri</label>
+                                <input type="text" class="form-control" value="@Model.Musteri.Ad @Model.Musteri.Soyad" disabled />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label">Urun</label>
+                                <input type="text" class="form-control" value="@Model.Urun.Urun_Ad" disabled />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label">Miktar</label>
+                                <input type="text" class="form-control" value="@Model.Miktar" disabled />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label">Siparis Tarihi</label>
+                                <input type="text" class="form-control" value="@(Model.Siparis_Tarihi.HasValue ? Model.Siparis_Tarihi.Value.ToString("yyyy-MM-dd") : "")" disabled />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label">Teslim Tarihi</label>
+                                <input type="text" class="form-control" value="@(Model.Teslim_Tarihi.HasValue ? Model.Teslim_Tarihi.Value.ToString("yyyy-MM-dd") : "")" disabled />
+                            </div>
+                        </div>
+                        <button type="button" onclick="window.history.back()" class="btn btn-gradient-primary me-2">Geri Don</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

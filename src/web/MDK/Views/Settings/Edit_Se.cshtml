@@ -1,0 +1,117 @@
+﻿
+@model MDK.Models.Ayarlar
+@{
+    ViewBag.Title = "Edit_Se";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urun Listesi</title>
+    <link rel="stylesheet"
+          href="~/purple/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet"
+          href="~/purple/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/purple/assets/css/style.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+
+<body>
+    <div class="loader"></div>
+    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+        <div class="app-main__outer">
+            <div class="app-main__inner">
+                <div class="col-md-8 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title mb-2">Ayari Duzenle</h4>
+                            <p class="card-description mb-4">Ayar bilgilerini güncelleyiniz</p>
+
+                            <form id="myForm" action="/Settings/Edit_Se/@Model.Id" method="POST">
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label for="ayaradi" class="form-label">Ayar Adı</label>
+                                        <input disabled="" name="ayaradi" id="ayaradi" type="text" value="@GetAyarMetni(Model.Ad)" class="form-control" required="required" maxlength="32" style="height:37px ">
+                                    </div>
+                                    @functions { public string GetAyarMetni(string ayarAdi)
+                                        {
+                                            string metin = string.Empty;
+                                            switch (ayarAdi.TrimEnd())
+                                            {
+                                                case "yonetici_ad":
+                                                    metin = "Yönetici Adı";
+                                                    break;
+                                                case "yonetici_email":
+                                                    metin = "Yönetici Emaili";
+                                                    break;
+                                                case "yonetici_tc":
+                                                    metin = "Yönetici TC Kimlik Numarası";
+                                                    break;
+                                                case "yonetici_adres":
+                                                    metin = "Yönetici Adresi";
+                                                    break;
+                                                case "yonetici_telefon":
+                                                    metin = "Yönetici Telefonu";
+                                                    break;
+                                                case "fabrika_isim":
+                                                    metin = "Fabrika İsmi";
+                                                    break;
+                                                case "fabrika_kapasite":
+                                                    metin = "Fabrika Kapasitesi";
+                                                    break;
+                                                case "fabrika_personel_sayi":
+                                                    metin = "Fabrika Personel sayısı";
+                                                    break;
+                                                case "fabrika_adres":
+                                                    metin = "Fabrika Adresi";
+                                                    break;
+                                                case "fabrika_telefon":
+                                                    metin = "Fabrika Telefonu";
+                                                    break;
+
+                                                default:
+                                                    metin = ayarAdi;
+                                                    break;
+                                            }
+                                            return metin;
+                                        } }
+
+                                    <div class="col-md-6">
+                                        <label for="ayardegeri" class="form-label">Ayar Değeri</label>
+                                        <input name="ayardegeri" id="ayardegeri" type="text" value="@Model.Deger.TrimEnd()" class="form-control" , required="required" , maxlength="32" , style="height:37px ">
+                                    </div>
+                                </div>
+                                <hr class="my-4 border-top border-2 border-secondary" />
+                                <button type="submit" name="ayarguncelle" class="btn btn-gradient-primary">Kaydet</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    document.getElementById("myForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        var form = event.target;
+        var formData = new FormData(form);
+
+        Swal.fire({
+            title: "Başarılı!",
+            text: "Ayar başarıyla güncellendi.",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 2000
+        }).then(function () {
+            // Submit the form
+            form.submit();
+        });
+    });</script>
+<script type="text/javascript" src="~/Content/js/main.js"></script>
+<script type="text/javascript" src="~/Content/js/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.all.min.js"></script>

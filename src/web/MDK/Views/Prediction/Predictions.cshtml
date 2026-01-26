@@ -1,0 +1,93 @@
+@model List<MDK.Models.Talep_Tahmini>
+@{
+    ViewBag.Title = "Tahmin Edilmiş Siparişler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tahmin Edilmiş Siparişler</title>
+
+    <link rel="stylesheet" href="/purple/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/purple/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/purple/assets/css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="~/purple/excel-print.css" rel="stylesheet" media="print" />
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Tahmin Edilmis Siparisler</h4>
+            <p class="card-description">Urunler icin tahmin edilen siparis miktarlari</p>
+
+            @if (Model != null && Model.Any())
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Urun Adi</th>
+                            <th>Tahmin Tarihi</th>
+                            <th>Tahmin Miktari</th>
+                            <th>Birim</th>
+                            <th>Islem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Urun.Urun_Ad</td>
+                                <td>@item.Tahmin_Tarihi.ToString()</td>
+                                <td>@((int)item.Tahmin_Miktari)</td>
+                                <td>@item.Urun.Birim.Birim1</td>
+                                <td>
+                                    <button class="btn btn-gradient-danger btn-sm" onclick="deletePrediction(@item.Id)">
+                                        <i class="mdi mdi-delete"></i> Sil
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div>Henuz tahmin yapilmamis.</div>
+            }
+
+            <div class="d-flex justify-content-end mt-4">
+                <a href="@Url.Action("Predict", "Prediction")" class="btn btn-gradient-primary me-2">
+                    <i class="mdi mdi-chart-line"></i> Tahmin Yap
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+    <script>
+        function deletePrediction(id) {
+            Swal.fire({
+                title: 'Bu tahmini silmek istediginize emin misiniz?',
+                text: "Bu islemi geri alamazsiniz!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Evet, Sil',
+                cancelButtonText: 'Iptal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '/Prediction/Delete/' + id;
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
+

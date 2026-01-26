@@ -1,0 +1,1298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adres">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Adres_Bilgisi" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Ayarlar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="100" />
+          <Property Name="Deger" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Bakim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Baslangic_Tarihi" Type="datetime" />
+          <Property Name="Bitis_Tarihi" Type="datetime" />
+          <Property Name="Bakim_Suresi" Type="int" />
+          <Property Name="Bakim_Nedeni" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Birim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Birim" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Gmail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gmail" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Ham_Madde">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ham_Madde" Type="nvarchar" MaxLength="50" />
+          <Property Name="Birim_FK" Type="int" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kategori" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Musteri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Soyad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gmail_FK" Type="int" />
+          <Property Name="Telefon_FK" Type="int" />
+          <Property Name="Adres_FK" Type="int" />
+          <Property Name="Tc_FK" Type="int" />
+          <Property Name="Silindi" Type="bit" />
+        </EntityType>
+        <EntityType Name="Personel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Soyad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Yas" Type="int" />
+          <Property Name="Maas" Type="int" />
+          <Property Name="Cinsiyet" Type="bit" />
+          <Property Name="Medeni_Durumu" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cocuk_Sayisi" Type="int" />
+          <Property Name="Telefon_FK" Type="int" />
+          <Property Name="Gmail_FK" Type="int" />
+          <Property Name="Adres_FK" Type="int" />
+          <Property Name="Tc_FK" Type="int" />
+          <Property Name="Silindi" Type="bit" />
+        </EntityType>
+        <EntityType Name="Recete">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Miktar" Type="int" />
+          <Property Name="Urun_FK" Type="int" />
+          <Property Name="Ham_Madde_FK" Type="int" />
+        </EntityType>
+        <EntityType Name="Siparis">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Siparis_Tarihi" Type="datetime" />
+          <Property Name="Teslim_Tarihi" Type="datetime" />
+          <Property Name="Urun_FK" Type="int" />
+          <Property Name="Miktar" Type="int" />
+          <Property Name="Musteri_FK" Type="int" />
+          <Property Name="Silindi" Type="bit" />
+          <Property Name="Mesai" Type="int" />
+          <Property Name="Pazar" Type="bit" />
+        </EntityType>
+        <EntityType Name="Stok">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Miktar" Type="int" />
+          <Property Name="Ham_Madde_FK" Type="int" />
+        </EntityType>
+        <EntityType Name="Stok_Optimizasyonu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Urun_FK" Type="int" Nullable="false" />
+          <Property Name="Tahmin_Tarihi" Type="date" />
+          <Property Name="Onerilen_Miktar" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Talep_Tahmini">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Urun_FK" Type="int" Nullable="false" />
+          <Property Name="Tahmin_Tarihi" Type="date" />
+          <Property Name="Tahmin_Miktari" Type="float" />
+        </EntityType>
+        <EntityType Name="Tc_Bilgileri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tc_No" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Telefon">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Telefon_No" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Urun">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Urun_Ad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Barkod" Type="nvarchar" MaxLength="50" />
+          <Property Name="Kategori_FK" Type="int" />
+          <Property Name="Birim_FK" Type="int" />
+          <Property Name="Tanim" Type="nvarchar" MaxLength="100" />
+          <Property Name="Kalite_Raporu" Type="nvarchar" MaxLength="300" />
+          <Property Name="Fabrika_Kapasitesi" Type="int" />
+          <Property Name="Silindi" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Ham_Madde_Birim">
+          <End Role="Birim" Type="Self.Birim" Multiplicity="0..1" />
+          <End Role="Ham_Madde" Type="Self.Ham_Madde" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Birim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ham_Madde">
+              <PropertyRef Name="Birim_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Musteri_Adres">
+          <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Musteri">
+              <PropertyRef Name="Adres_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Musteri_Gmail">
+          <End Role="Gmail" Type="Self.Gmail" Multiplicity="0..1" />
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gmail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Musteri">
+              <PropertyRef Name="Gmail_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Musteri_Tc_Bilgileri">
+          <End Role="Tc_Bilgileri" Type="Self.Tc_Bilgileri" Multiplicity="0..1" />
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tc_Bilgileri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Musteri">
+              <PropertyRef Name="Tc_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Musteri_Telefon">
+          <End Role="Telefon" Type="Self.Telefon" Multiplicity="0..1" />
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Telefon">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Musteri">
+              <PropertyRef Name="Telefon_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personel_Adres">
+          <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+          <End Role="Personel" Type="Self.Personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Personel">
+              <PropertyRef Name="Adres_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personel_Gmail">
+          <End Role="Gmail" Type="Self.Gmail" Multiplicity="0..1" />
+          <End Role="Personel" Type="Self.Personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gmail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Personel">
+              <PropertyRef Name="Gmail_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personel_Tc_Bilgileri">
+          <End Role="Tc_Bilgileri" Type="Self.Tc_Bilgileri" Multiplicity="0..1" />
+          <End Role="Personel" Type="Self.Personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tc_Bilgileri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Personel">
+              <PropertyRef Name="Tc_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personel_Telefon">
+          <End Role="Telefon" Type="Self.Telefon" Multiplicity="0..1" />
+          <End Role="Personel" Type="Self.Personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Telefon">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Personel">
+              <PropertyRef Name="Telefon_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recete_Ham_Madde">
+          <End Role="Ham_Madde" Type="Self.Ham_Madde" Multiplicity="0..1" />
+          <End Role="Recete" Type="Self.Recete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ham_Madde">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recete">
+              <PropertyRef Name="Ham_Madde_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recete_Urun">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="Recete" Type="Self.Recete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recete">
+              <PropertyRef Name="Urun_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Siparis_Musteri">
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="0..1" />
+          <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musteri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Siparis">
+              <PropertyRef Name="Musteri_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Siparis_Urun">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Siparis">
+              <PropertyRef Name="Urun_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stok_Ham_Madde">
+          <End Role="Ham_Madde" Type="Self.Ham_Madde" Multiplicity="0..1" />
+          <End Role="Stok" Type="Self.Stok" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ham_Madde">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stok">
+              <PropertyRef Name="Ham_Madde_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stok_Optimizasyonu_Urun">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="1" />
+          <End Role="Stok_Optimizasyonu" Type="Self.Stok_Optimizasyonu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stok_Optimizasyonu">
+              <PropertyRef Name="Urun_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Talep_Tahmini_Urun">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="1" />
+          <End Role="Talep_Tahmini" Type="Self.Talep_Tahmini" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Talep_Tahmini">
+              <PropertyRef Name="Urun_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urun_Birim">
+          <End Role="Birim" Type="Self.Birim" Multiplicity="0..1" />
+          <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Birim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Urun">
+              <PropertyRef Name="Birim_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urun_Kategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
+          <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Urun">
+              <PropertyRef Name="Kategori_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Adres" EntityType="Self.Adres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ayarlar" EntityType="Self.Ayarlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bakim" EntityType="Self.Bakim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Birim" EntityType="Self.Birim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gmail" EntityType="Self.Gmail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ham_Madde" EntityType="Self.Ham_Madde" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Musteri" EntityType="Self.Musteri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personel" EntityType="Self.Personel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recete" EntityType="Self.Recete" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Siparis" EntityType="Self.Siparis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stok" EntityType="Self.Stok" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stok_Optimizasyonu" EntityType="Self.Stok_Optimizasyonu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Talep_Tahmini" EntityType="Self.Talep_Tahmini" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tc_Bilgileri" EntityType="Self.Tc_Bilgileri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Telefon" EntityType="Self.Telefon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Urun" EntityType="Self.Urun" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Ham_Madde_Birim" Association="Self.FK_Ham_Madde_Birim">
+            <End Role="Birim" EntitySet="Birim" />
+            <End Role="Ham_Madde" EntitySet="Ham_Madde" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Musteri_Adres" Association="Self.FK_Musteri_Adres">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Musteri" EntitySet="Musteri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Musteri_Gmail" Association="Self.FK_Musteri_Gmail">
+            <End Role="Gmail" EntitySet="Gmail" />
+            <End Role="Musteri" EntitySet="Musteri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Musteri_Tc_Bilgileri" Association="Self.FK_Musteri_Tc_Bilgileri">
+            <End Role="Tc_Bilgileri" EntitySet="Tc_Bilgileri" />
+            <End Role="Musteri" EntitySet="Musteri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Musteri_Telefon" Association="Self.FK_Musteri_Telefon">
+            <End Role="Telefon" EntitySet="Telefon" />
+            <End Role="Musteri" EntitySet="Musteri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personel_Adres" Association="Self.FK_Personel_Adres">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Personel" EntitySet="Personel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personel_Gmail" Association="Self.FK_Personel_Gmail">
+            <End Role="Gmail" EntitySet="Gmail" />
+            <End Role="Personel" EntitySet="Personel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personel_Tc_Bilgileri" Association="Self.FK_Personel_Tc_Bilgileri">
+            <End Role="Tc_Bilgileri" EntitySet="Tc_Bilgileri" />
+            <End Role="Personel" EntitySet="Personel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personel_Telefon" Association="Self.FK_Personel_Telefon">
+            <End Role="Telefon" EntitySet="Telefon" />
+            <End Role="Personel" EntitySet="Personel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recete_Ham_Madde" Association="Self.FK_Recete_Ham_Madde">
+            <End Role="Ham_Madde" EntitySet="Ham_Madde" />
+            <End Role="Recete" EntitySet="Recete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recete_Urun" Association="Self.FK_Recete_Urun">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="Recete" EntitySet="Recete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Siparis_Musteri" Association="Self.FK_Siparis_Musteri">
+            <End Role="Musteri" EntitySet="Musteri" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Siparis_Urun" Association="Self.FK_Siparis_Urun">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stok_Ham_Madde" Association="Self.FK_Stok_Ham_Madde">
+            <End Role="Ham_Madde" EntitySet="Ham_Madde" />
+            <End Role="Stok" EntitySet="Stok" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stok_Optimizasyonu_Urun" Association="Self.FK_Stok_Optimizasyonu_Urun">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="Stok_Optimizasyonu" EntitySet="Stok_Optimizasyonu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Talep_Tahmini_Urun" Association="Self.FK_Talep_Tahmini_Urun">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="Talep_Tahmini" EntitySet="Talep_Tahmini" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urun_Birim" Association="Self.FK_Urun_Birim">
+            <End Role="Birim" EntitySet="Birim" />
+            <End Role="Urun" EntitySet="Urun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urun_Kategori" Association="Self.FK_Urun_Kategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Urun" EntitySet="Urun" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Adres">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adres_Bilgisi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Musteri" Relationship="Self.FK_Musteri_Adres" FromRole="Adres" ToRole="Musteri" />
+          <NavigationProperty Name="Personel" Relationship="Self.FK_Personel_Adres" FromRole="Adres" ToRole="Personel" />
+        </EntityType>
+        <EntityType Name="Ayarlar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Deger" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Birim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Birim1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ham_Madde" Relationship="Self.FK_Ham_Madde_Birim" FromRole="Birim" ToRole="Ham_Madde" />
+          <NavigationProperty Name="Urun" Relationship="Self.FK_Urun_Birim" FromRole="Birim" ToRole="Urun" />
+        </EntityType>
+        <EntityType Name="Gmail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gmail1" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Musteri" Relationship="Self.FK_Musteri_Gmail" FromRole="Gmail" ToRole="Musteri" />
+          <NavigationProperty Name="Personel" Relationship="Self.FK_Personel_Gmail" FromRole="Gmail" ToRole="Personel" />
+        </EntityType>
+        <EntityType Name="Ham_Madde">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ham_Madde1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Birim_FK" Type="Int32" />
+          <NavigationProperty Name="Birim" Relationship="Self.FK_Ham_Madde_Birim" FromRole="Ham_Madde" ToRole="Birim" />
+          <NavigationProperty Name="Recete" Relationship="Self.FK_Recete_Ham_Madde" FromRole="Ham_Madde" ToRole="Recete" />
+          <NavigationProperty Name="Stok" Relationship="Self.FK_Stok_Ham_Madde" FromRole="Ham_Madde" ToRole="Stok" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kategori1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Urun" Relationship="Self.FK_Urun_Kategori" FromRole="Kategori" ToRole="Urun" />
+        </EntityType>
+        <EntityType Name="Musteri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gmail_FK" Type="Int32" />
+          <Property Name="Telefon_FK" Type="Int32" />
+          <Property Name="Adres_FK" Type="Int32" />
+          <Property Name="Tc_FK" Type="Int32" />
+          <Property Name="Silindi" Type="Boolean" />
+          <NavigationProperty Name="Adres" Relationship="Self.FK_Musteri_Adres" FromRole="Musteri" ToRole="Adres" />
+          <NavigationProperty Name="Gmail" Relationship="Self.FK_Musteri_Gmail" FromRole="Musteri" ToRole="Gmail" />
+          <NavigationProperty Name="Tc_Bilgileri" Relationship="Self.FK_Musteri_Tc_Bilgileri" FromRole="Musteri" ToRole="Tc_Bilgileri" />
+          <NavigationProperty Name="Telefon" Relationship="Self.FK_Musteri_Telefon" FromRole="Musteri" ToRole="Telefon" />
+          <NavigationProperty Name="Siparis" Relationship="Self.FK_Siparis_Musteri" FromRole="Musteri" ToRole="Siparis" />
+        </EntityType>
+        <EntityType Name="Personel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Yas" Type="Int32" />
+          <Property Name="Maas" Type="Int32" />
+          <Property Name="Cinsiyet" Type="Boolean" />
+          <Property Name="Medeni_Durumu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cocuk_Sayisi" Type="Int32" />
+          <Property Name="Telefon_FK" Type="Int32" />
+          <Property Name="Gmail_FK" Type="Int32" />
+          <Property Name="Adres_FK" Type="Int32" />
+          <Property Name="Tc_FK" Type="Int32" />
+          <Property Name="Silindi" Type="Boolean" />
+          <NavigationProperty Name="Adres" Relationship="Self.FK_Personel_Adres" FromRole="Personel" ToRole="Adres" />
+          <NavigationProperty Name="Gmail" Relationship="Self.FK_Personel_Gmail" FromRole="Personel" ToRole="Gmail" />
+          <NavigationProperty Name="Tc_Bilgileri" Relationship="Self.FK_Personel_Tc_Bilgileri" FromRole="Personel" ToRole="Tc_Bilgileri" />
+          <NavigationProperty Name="Telefon" Relationship="Self.FK_Personel_Telefon" FromRole="Personel" ToRole="Telefon" />
+        </EntityType>
+        <EntityType Name="Recete">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Miktar" Type="Int32" />
+          <Property Name="Urun_FK" Type="Int32" />
+          <Property Name="Ham_Madde_FK" Type="Int32" />
+          <NavigationProperty Name="Ham_Madde" Relationship="Self.FK_Recete_Ham_Madde" FromRole="Recete" ToRole="Ham_Madde" />
+          <NavigationProperty Name="Urun" Relationship="Self.FK_Recete_Urun" FromRole="Recete" ToRole="Urun" />
+        </EntityType>
+        <EntityType Name="Siparis">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Siparis_Tarihi" Type="DateTime" Precision="3" />
+          <Property Name="Teslim_Tarihi" Type="DateTime" Precision="3" />
+          <Property Name="Urun_FK" Type="Int32" />
+          <Property Name="Miktar" Type="Int32" />
+          <Property Name="Musteri_FK" Type="Int32" />
+          <NavigationProperty Name="Musteri" Relationship="Self.FK_Siparis_Musteri" FromRole="Siparis" ToRole="Musteri" />
+          <NavigationProperty Name="Urun" Relationship="Self.FK_Siparis_Urun" FromRole="Siparis" ToRole="Urun" />
+          <Property Name="Silindi" Type="Boolean" />
+          <Property Name="Mesai" Type="Int32" />
+          <Property Name="Pazar" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Stok">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Miktar" Type="Int32" />
+          <Property Name="Ham_Madde_FK" Type="Int32" />
+          <NavigationProperty Name="Ham_Madde" Relationship="Self.FK_Stok_Ham_Madde" FromRole="Stok" ToRole="Ham_Madde" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tc_Bilgileri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tc_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Musteri" Relationship="Self.FK_Musteri_Tc_Bilgileri" FromRole="Tc_Bilgileri" ToRole="Musteri" />
+          <NavigationProperty Name="Personel" Relationship="Self.FK_Personel_Tc_Bilgileri" FromRole="Tc_Bilgileri" ToRole="Personel" />
+        </EntityType>
+        <EntityType Name="Telefon">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Telefon_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Musteri" Relationship="Self.FK_Musteri_Telefon" FromRole="Telefon" ToRole="Musteri" />
+          <NavigationProperty Name="Personel" Relationship="Self.FK_Personel_Telefon" FromRole="Telefon" ToRole="Personel" />
+        </EntityType>
+        <EntityType Name="Urun">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Urun_Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Barkod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Kategori_FK" Type="Int32" />
+          <Property Name="Birim_FK" Type="Int32" />
+          <Property Name="Tanim" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Kalite_Raporu" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Fabrika_Kapasitesi" Type="Int32" />
+          <Property Name="Silindi" Type="Boolean" />
+          <NavigationProperty Name="Birim" Relationship="Self.FK_Urun_Birim" FromRole="Urun" ToRole="Birim" />
+          <NavigationProperty Name="Kategori" Relationship="Self.FK_Urun_Kategori" FromRole="Urun" ToRole="Kategori" />
+          <NavigationProperty Name="Recete" Relationship="Self.FK_Recete_Urun" FromRole="Urun" ToRole="Recete" />
+          <NavigationProperty Name="Siparis" Relationship="Self.FK_Siparis_Urun" FromRole="Urun" ToRole="Siparis" />
+          <NavigationProperty Name="Stok_Optimizasyonu" Relationship="Model.FK_Stok_Optimizasyonu_Urun" FromRole="Urun" ToRole="Stok_Optimizasyonu" />
+          <NavigationProperty Name="Talep_Tahmini" Relationship="Model.FK_Talep_Tahmini_Urun" FromRole="Urun" ToRole="Talep_Tahmini" />
+        </EntityType>
+        <Association Name="FK_Musteri_Adres">
+          <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Musteri">
+              <PropertyRef Name="Adres_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personel_Adres">
+          <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+          <End Role="Personel" Type="Self.Personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Personel">
+              <PropertyRef Name="Adres_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ham_Madde_Birim">
+          <End Role="Birim" Type="Self.Birim" Multiplicity="0..1" />
+          <End Role="Ham_Madde" Type="Self.Ham_Madde" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Birim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ham_Madde">
+              <PropertyRef Name="Birim_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urun_Birim">
+          <End Role="Birim" Type="Self.Birim" Multiplicity="0..1" />
+          <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Birim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Urun">
+              <PropertyRef Name="Birim_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Musteri_Gmail">
+          <End Role="Gmail" Type="Self.Gmail" Multiplicity="0..1" />
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gmail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Musteri">
+              <PropertyRef Name="Gmail_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personel_Gmail">
+          <End Role="Gmail" Type="Self.Gmail" Multiplicity="0..1" />
+          <End Role="Personel" Type="Self.Personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gmail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Personel">
+              <PropertyRef Name="Gmail_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recete_Ham_Madde">
+          <End Role="Ham_Madde" Type="Self.Ham_Madde" Multiplicity="0..1" />
+          <End Role="Recete" Type="Self.Recete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ham_Madde">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recete">
+              <PropertyRef Name="Ham_Madde_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stok_Ham_Madde">
+          <End Role="Ham_Madde" Type="Self.Ham_Madde" Multiplicity="0..1" />
+          <End Role="Stok" Type="Self.Stok" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ham_Madde">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stok">
+              <PropertyRef Name="Ham_Madde_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urun_Kategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
+          <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Urun">
+              <PropertyRef Name="Kategori_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Musteri_Tc_Bilgileri">
+          <End Role="Tc_Bilgileri" Type="Self.Tc_Bilgileri" Multiplicity="0..1" />
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tc_Bilgileri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Musteri">
+              <PropertyRef Name="Tc_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Musteri_Telefon">
+          <End Role="Telefon" Type="Self.Telefon" Multiplicity="0..1" />
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Telefon">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Musteri">
+              <PropertyRef Name="Telefon_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Siparis_Musteri">
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="0..1" />
+          <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musteri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Siparis">
+              <PropertyRef Name="Musteri_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personel_Tc_Bilgileri">
+          <End Role="Tc_Bilgileri" Type="Self.Tc_Bilgileri" Multiplicity="0..1" />
+          <End Role="Personel" Type="Self.Personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tc_Bilgileri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Personel">
+              <PropertyRef Name="Tc_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personel_Telefon">
+          <End Role="Telefon" Type="Self.Telefon" Multiplicity="0..1" />
+          <End Role="Personel" Type="Self.Personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Telefon">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Personel">
+              <PropertyRef Name="Telefon_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recete_Urun">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="Recete" Type="Self.Recete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recete">
+              <PropertyRef Name="Urun_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Siparis_Urun">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Siparis">
+              <PropertyRef Name="Urun_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Adres" EntityType="Self.Adres" />
+          <EntitySet Name="Ayarlar" EntityType="Self.Ayarlar" />
+          <EntitySet Name="Birim" EntityType="Self.Birim" />
+          <EntitySet Name="Gmail" EntityType="Self.Gmail" />
+          <EntitySet Name="Ham_Madde" EntityType="Self.Ham_Madde" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" />
+          <EntitySet Name="Musteri" EntityType="Self.Musteri" />
+          <EntitySet Name="Personel" EntityType="Self.Personel" />
+          <EntitySet Name="Recete" EntityType="Self.Recete" />
+          <EntitySet Name="Siparis" EntityType="Self.Siparis" />
+          <EntitySet Name="Stok" EntityType="Self.Stok" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tc_Bilgileri" EntityType="Self.Tc_Bilgileri" />
+          <EntitySet Name="Telefon" EntityType="Self.Telefon" />
+          <EntitySet Name="Urun" EntityType="Self.Urun" />
+          <AssociationSet Name="FK_Musteri_Adres" Association="Self.FK_Musteri_Adres">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Musteri" EntitySet="Musteri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personel_Adres" Association="Self.FK_Personel_Adres">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Personel" EntitySet="Personel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ham_Madde_Birim" Association="Self.FK_Ham_Madde_Birim">
+            <End Role="Birim" EntitySet="Birim" />
+            <End Role="Ham_Madde" EntitySet="Ham_Madde" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urun_Birim" Association="Self.FK_Urun_Birim">
+            <End Role="Birim" EntitySet="Birim" />
+            <End Role="Urun" EntitySet="Urun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Musteri_Gmail" Association="Self.FK_Musteri_Gmail">
+            <End Role="Gmail" EntitySet="Gmail" />
+            <End Role="Musteri" EntitySet="Musteri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personel_Gmail" Association="Self.FK_Personel_Gmail">
+            <End Role="Gmail" EntitySet="Gmail" />
+            <End Role="Personel" EntitySet="Personel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recete_Ham_Madde" Association="Self.FK_Recete_Ham_Madde">
+            <End Role="Ham_Madde" EntitySet="Ham_Madde" />
+            <End Role="Recete" EntitySet="Recete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stok_Ham_Madde" Association="Self.FK_Stok_Ham_Madde">
+            <End Role="Ham_Madde" EntitySet="Ham_Madde" />
+            <End Role="Stok" EntitySet="Stok" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urun_Kategori" Association="Self.FK_Urun_Kategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Urun" EntitySet="Urun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Musteri_Tc_Bilgileri" Association="Self.FK_Musteri_Tc_Bilgileri">
+            <End Role="Tc_Bilgileri" EntitySet="Tc_Bilgileri" />
+            <End Role="Musteri" EntitySet="Musteri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Musteri_Telefon" Association="Self.FK_Musteri_Telefon">
+            <End Role="Telefon" EntitySet="Telefon" />
+            <End Role="Musteri" EntitySet="Musteri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Siparis_Musteri" Association="Self.FK_Siparis_Musteri">
+            <End Role="Musteri" EntitySet="Musteri" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personel_Tc_Bilgileri" Association="Self.FK_Personel_Tc_Bilgileri">
+            <End Role="Tc_Bilgileri" EntitySet="Tc_Bilgileri" />
+            <End Role="Personel" EntitySet="Personel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personel_Telefon" Association="Self.FK_Personel_Telefon">
+            <End Role="Telefon" EntitySet="Telefon" />
+            <End Role="Personel" EntitySet="Personel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recete_Urun" Association="Self.FK_Recete_Urun">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="Recete" EntitySet="Recete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Siparis_Urun" Association="Self.FK_Siparis_Urun">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <EntitySet Name="Stok_Optimizasyonu" EntityType="Model.Stok_Optimizasyonu" />
+          <AssociationSet Name="FK_Stok_Optimizasyonu_Urun" Association="Model.FK_Stok_Optimizasyonu_Urun">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="Stok_Optimizasyonu" EntitySet="Stok_Optimizasyonu" />
+          </AssociationSet>
+          <EntitySet Name="Bakim" EntityType="Model.Bakim" />
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Talep_Tahmini" EntityType="Model.Talep_Tahmini" />
+          <AssociationSet Name="FK_Talep_Tahmini_Urun" Association="Model.FK_Talep_Tahmini_Urun">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="Talep_Tahmini" EntitySet="Talep_Tahmini" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Stok_Optimizasyonu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Urun_FK" Type="Int32" Nullable="false" />
+          <Property Name="Tahmin_Tarihi" Type="DateTime" Precision="0" />
+          <Property Name="Onerilen_Miktar" Type="Int32" />
+          <NavigationProperty Name="Urun" Relationship="Model.FK_Stok_Optimizasyonu_Urun" FromRole="Stok_Optimizasyonu" ToRole="Urun" />
+        </EntityType>
+        <Association Name="FK_Stok_Optimizasyonu_Urun">
+          <End Type="Model.Urun" Role="Urun" Multiplicity="1" />
+          <End Type="Model.Stok_Optimizasyonu" Role="Stok_Optimizasyonu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stok_Optimizasyonu">
+              <PropertyRef Name="Urun_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Bakim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Baslangic_Tarihi" Type="DateTime" Precision="3" />
+          <Property Name="Bitis_Tarihi" Type="DateTime" Precision="3" />
+          <Property Name="Bakim_Suresi" Type="Int32" />
+          <Property Name="Bakim_Nedeni" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Talep_Tahmini">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Urun_FK" Type="Int32" Nullable="false" />
+          <Property Name="Tahmin_Tarihi" Type="DateTime" Precision="0" />
+          <Property Name="Tahmin_Miktari" Type="Double" />
+          <NavigationProperty Name="Urun" Relationship="Model.FK_Talep_Tahmini_Urun" FromRole="Talep_Tahmini" ToRole="Urun" />
+        </EntityType>
+        <Association Name="FK_Talep_Tahmini_Urun">
+          <End Type="Model.Urun" Role="Urun" Multiplicity="1" />
+          <End Type="Model.Talep_Tahmini" Role="Talep_Tahmini" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Talep_Tahmini">
+              <PropertyRef Name="Urun_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Adres">
+            <EntityTypeMapping TypeName="Model.Adres">
+              <MappingFragment StoreEntitySet="Adres">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Adres_Bilgisi" ColumnName="Adres_Bilgisi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ayarlar">
+            <EntityTypeMapping TypeName="Model.Ayarlar">
+              <MappingFragment StoreEntitySet="Ayarlar">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Deger" ColumnName="Deger" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Birim">
+            <EntityTypeMapping TypeName="Model.Birim">
+              <MappingFragment StoreEntitySet="Birim">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Birim1" ColumnName="Birim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gmail">
+            <EntityTypeMapping TypeName="Model.Gmail">
+              <MappingFragment StoreEntitySet="Gmail">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Gmail1" ColumnName="Gmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ham_Madde">
+            <EntityTypeMapping TypeName="Model.Ham_Madde">
+              <MappingFragment StoreEntitySet="Ham_Madde">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ham_Madde1" ColumnName="Ham_Madde" />
+                <ScalarProperty Name="Birim_FK" ColumnName="Birim_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategori">
+            <EntityTypeMapping TypeName="Model.Kategori">
+              <MappingFragment StoreEntitySet="Kategori">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Kategori1" ColumnName="Kategori" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Musteri">
+            <EntityTypeMapping TypeName="Model.Musteri">
+              <MappingFragment StoreEntitySet="Musteri">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="Gmail_FK" ColumnName="Gmail_FK" />
+                <ScalarProperty Name="Telefon_FK" ColumnName="Telefon_FK" />
+                <ScalarProperty Name="Adres_FK" ColumnName="Adres_FK" />
+                <ScalarProperty Name="Tc_FK" ColumnName="Tc_FK" />
+                <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personel">
+            <EntityTypeMapping TypeName="Model.Personel">
+              <MappingFragment StoreEntitySet="Personel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="Yas" ColumnName="Yas" />
+                <ScalarProperty Name="Maas" ColumnName="Maas" />
+                <ScalarProperty Name="Cinsiyet" ColumnName="Cinsiyet" />
+                <ScalarProperty Name="Medeni_Durumu" ColumnName="Medeni_Durumu" />
+                <ScalarProperty Name="Cocuk_Sayisi" ColumnName="Cocuk_Sayisi" />
+                <ScalarProperty Name="Telefon_FK" ColumnName="Telefon_FK" />
+                <ScalarProperty Name="Gmail_FK" ColumnName="Gmail_FK" />
+                <ScalarProperty Name="Adres_FK" ColumnName="Adres_FK" />
+                <ScalarProperty Name="Tc_FK" ColumnName="Tc_FK" />
+                <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recete">
+            <EntityTypeMapping TypeName="Model.Recete">
+              <MappingFragment StoreEntitySet="Recete">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+                <ScalarProperty Name="Urun_FK" ColumnName="Urun_FK" />
+                <ScalarProperty Name="Ham_Madde_FK" ColumnName="Ham_Madde_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Siparis">
+            <EntityTypeMapping TypeName="Model.Siparis">
+              <MappingFragment StoreEntitySet="Siparis">
+                <ScalarProperty Name="Pazar" ColumnName="Pazar" />
+                <ScalarProperty Name="Mesai" ColumnName="Mesai" />
+                <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Siparis_Tarihi" ColumnName="Siparis_Tarihi" />
+                <ScalarProperty Name="Teslim_Tarihi" ColumnName="Teslim_Tarihi" />
+                <ScalarProperty Name="Urun_FK" ColumnName="Urun_FK" />
+                <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+                <ScalarProperty Name="Musteri_FK" ColumnName="Musteri_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stok">
+            <EntityTypeMapping TypeName="Model.Stok">
+              <MappingFragment StoreEntitySet="Stok">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+                <ScalarProperty Name="Ham_Madde_FK" ColumnName="Ham_Madde_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tc_Bilgileri">
+            <EntityTypeMapping TypeName="Model.Tc_Bilgileri">
+              <MappingFragment StoreEntitySet="Tc_Bilgileri">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Tc_No" ColumnName="Tc_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Telefon">
+            <EntityTypeMapping TypeName="Model.Telefon">
+              <MappingFragment StoreEntitySet="Telefon">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Telefon_No" ColumnName="Telefon_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Urun">
+            <EntityTypeMapping TypeName="Model.Urun">
+              <MappingFragment StoreEntitySet="Urun">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Urun_Ad" ColumnName="Urun_Ad" />
+                <ScalarProperty Name="Barkod" ColumnName="Barkod" />
+                <ScalarProperty Name="Kategori_FK" ColumnName="Kategori_FK" />
+                <ScalarProperty Name="Birim_FK" ColumnName="Birim_FK" />
+                <ScalarProperty Name="Tanim" ColumnName="Tanim" />
+                <ScalarProperty Name="Kalite_Raporu" ColumnName="Kalite_Raporu" />
+                <ScalarProperty Name="Fabrika_Kapasitesi" ColumnName="Fabrika_Kapasitesi" />
+                <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stok_Optimizasyonu">
+            <EntityTypeMapping TypeName="Model.Stok_Optimizasyonu">
+              <MappingFragment StoreEntitySet="Stok_Optimizasyonu">
+                <ScalarProperty Name="Onerilen_Miktar" ColumnName="Onerilen_Miktar" />
+                <ScalarProperty Name="Tahmin_Tarihi" ColumnName="Tahmin_Tarihi" />
+                <ScalarProperty Name="Urun_FK" ColumnName="Urun_FK" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bakim">
+            <EntityTypeMapping TypeName="Model.Bakim">
+              <MappingFragment StoreEntitySet="Bakim">
+                <ScalarProperty Name="Bakim_Nedeni" ColumnName="Bakim_Nedeni" />
+                <ScalarProperty Name="Bakim_Suresi" ColumnName="Bakim_Suresi" />
+                <ScalarProperty Name="Bitis_Tarihi" ColumnName="Bitis_Tarihi" />
+                <ScalarProperty Name="Baslangic_Tarihi" ColumnName="Baslangic_Tarihi" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Model.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Model.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Model.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Model.Store.sp_helpdiagramdefinition" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Model.Store.sp_helpdiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Model.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Model.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Talep_Tahmini">
+            <EntityTypeMapping TypeName="Model.Talep_Tahmini">
+              <MappingFragment StoreEntitySet="Talep_Tahmini">
+                <ScalarProperty Name="Tahmin_Miktari" ColumnName="Tahmin_Miktari" />
+                <ScalarProperty Name="Tahmin_Tarihi" ColumnName="Tahmin_Tarihi" />
+                <ScalarProperty Name="Urun_FK" ColumnName="Urun_FK" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

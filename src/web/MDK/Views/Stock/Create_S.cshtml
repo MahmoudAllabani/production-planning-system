@@ -1,0 +1,75 @@
+﻿
+@model List<MDK.Models.Ham_Madde>
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stok Listesi</title>
+    <link rel="stylesheet" href="~/purple/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/purple/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/purple/assets/css/style.css" />
+</head>
+
+<div class="loader"></div>
+<div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+    <!-- header and sidebar: unchanged -->
+    <div class="app-main__outer">
+        <div class="app-main__inner">
+            <div class="col-md-8 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-2">Stok Kaydı</h4>
+                        <p class="card-description mb-4">Yeni Kayit bilgilerini giriniz</p>
+
+                        <form id="myForm" action="/Stock/Create_S" method="POST" enctype="multipart/form-data"
+                              data-parsley-validate class="forms-sample">
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <label for="stockhammadde" class="form-label">Hammadde Adı:</label>
+                                    <select name="stockhammadde" id="stockhammadde" class="form-select" required>
+                                        @foreach (var h in Model)
+                                        {
+                                            <option value="@h.Ham_Madde1">@h.Ham_Madde1</option>
+                                        }
+                                    </select>
+
+
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="stockmiktar" class="form-label">Miktar:</label>
+                                    <input name="stockmiktar" id="stockmiktar" type="text" class="form-control" required minlength="1" maxlength="32" style="height:37px ">
+                                </div>
+                            </div>
+                            <hr class="my-4 border-top border-2 border-secondary" />
+                            <button type="submit" class="btn btn-gradient-primary">Ekle</button>
+                        </form>
+
+                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+                        <script>
+                            document.getElementById("myForm").addEventListener("submit", function (event) {
+                                event.preventDefault();
+                                var form = event.target;
+                                var formData = new FormData(form);
+
+                                Swal.fire({
+                                    title: "Başarılı!",
+                                    text: "Hammadde başarıyla eklendi.",
+                                    icon: "success",
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then(function () {
+                                    // Submit the form
+                                    form.submit();
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="18587f9d538247eeb848572431463ab2" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Adres" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Ayarlar" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Birim" Width="1.5" PointX="3.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Gmail" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Ham_Madde" Width="1.5" PointX="6" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Kategori" Width="1.5" PointX="3.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Musteri" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Personel" Width="1.5" PointX="6" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Recete" Width="1.5" PointX="8.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Siparis" Width="1.5" PointX="8.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Stok" Width="1.5" PointX="8.25" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="10.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Tc_Bilgileri" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Telefon" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Urun" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_Musteri_Adres" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Personel_Adres" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Ham_Madde_Birim" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Urun_Birim" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Musteri_Gmail" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Personel_Gmail" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Recete_Ham_Madde" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Stok_Ham_Madde" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Urun_Kategori" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Musteri_Tc_Bilgileri" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Musteri_Telefon" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Siparis_Musteri" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Personel_Tc_Bilgileri" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Personel_Telefon" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Recete_Urun" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Siparis_Urun" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

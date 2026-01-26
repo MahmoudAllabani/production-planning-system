@@ -1,0 +1,162 @@
+﻿@using MDK.Models
+
+@{
+    ViewBag.Title = "urun_ekle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using MDK.Models
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urun Listesi</title>
+    <link rel="stylesheet" href="~/purple/assets/vendors/mdi/css/materialdesignicons.min.css"/>
+    <link rel="stylesheet" href="~/purple/assets/vendors/css/vendor.bundle.base.css" />
+    <link rel="stylesheet" href="~/purple/assets/css/style.css"/>
+
+</head>
+<body>
+    <div class="loader"></div>
+    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+        <!-- header and sidebar: unchanged -->
+        <div class="app-main__outer">
+            <div class="app-main__inner">
+                <div class="col-md-8 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title mb-2">Ürün Kaydı</h4>
+                            <p class="card-description mb-4">Yeni ürün bilgilerini giriniz</p>
+
+                            <form action="/Product/Create_P" method="POST" enctype="multipart/form-data"
+                                  data-parsley-validate class="forms-sample">
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label for="productName" class="form-label">Ürün Adı</label>
+                                        <input type="text" id="productName" name="productName"
+                                               class="form-control" required minlength="1" maxlength="32" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="KategoriSelect" class="form-label">Kategori</label>
+                                        <select id="KategoriSelect" name="KategoriSelect"
+                                                class="form-select" required>
+                                            @foreach (var kategori in ViewBag.KategoriListesi)
+                                            {
+                                                <option value="@kategori.Id">@kategori.Kategori1</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label for="BirimSelect" class="form-label">Birim</label>
+                                        <select id="BirimSelect" name="BirimSelect"
+                                                class="form-select" required>
+                                            @foreach (var birim in ViewBag.BirimListesi)
+                                            {
+                                                <option value="@birim.Id">@birim.Birim1</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="productMiktar" class="form-label">Miktar</label>
+                                        <input type="number" id="productMiktar" name="productMiktar"
+                                               class="form-control" required min="0" max="1000000000" />
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label for="productBarkod" class="form-label">Barkod</label>
+                                        <input type="number" id="productBarkod" name="productBarkod"
+                                               class="form-control" required min="0" max="1000000000" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="productKapasite" class="form-label">Kapasite</label>
+                                        <input type="number" id="productKapasite" name="productKapasite"
+                                               class="form-control" required min="0" max="10000000" />
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label for="productKaliteRapor" class="form-label">Kalite Raporu</label>
+                                        <textarea id="productKaliteRapor" name="productKaliteRapor"
+                                                  class="form-control" rows="5"
+                                                  required minlength="1" maxlength="1000000000"></textarea>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="productTanim" class="form-label">Tanım</label>
+                                        <textarea id="productTanim" name="productTanim"
+                                                  class="form-control" rows="5"
+                                                  required minlength="1" maxlength="1000000000"></textarea>
+                                    </div>
+                                </div>
+
+                                <h4 class="card-title mt-4 mb-3">Reçete</h4>
+                                <div id="receteListesi">
+                                    <div class="row g-3 align-items-end mb-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label visually-hidden">Hammadde</label>
+                                            <select name="HammaddeSelect[]" class="form-select">
+                                                @foreach (var hammadde in ViewBag.HammaddeListesi)
+                                                {
+                                                    <option value="@hammadde.Id">@hammadde.Ham_Madde1</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label visually-hidden">Miktar</label>
+                                            <input type="number" name="Miktar[]" class="form-control"
+                                                   placeholder="Miktar (gr, ml, adet)" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-gradient-danger w-100"
+                                                    onclick="sil(this)">
+                                                -
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <button type="button" class="btn btn-gradient-primary"
+                                            onclick="hammaddeEkle()">
+                                        Hammadde Ekle
+                                    </button>
+                                </div>
+                                <hr class="my-4 border-top border-2 border-secondary" />
+                                <button type="submit" class="btn btn-gradient-primary">Kaydet</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- footer unmodified -->
+        </div>
+    </div>
+
+    <script>
+                    function hammaddeEkle() {
+            var row = document.createElement('div');
+            row.className = 'row g-3 align-items-end mb-3';
+
+            var col1 = document.createElement('div'); col1.className = 'col-md-4';
+            col1.innerHTML = '<select name="HammaddeSelect[]" class="form-select">@foreach (var hammadde in ViewBag.HammaddeListesi){<option value="@hammadde.Id">@hammadde.Ham_Madde1</option>}</select>';
+
+            var col2 = document.createElement('div'); col2.className = 'col-md-4';
+            col2.innerHTML = '<input type="number" name="Miktar[]" class="form-control" placeholder="Miktar (gr, ml, adet)" />';
+
+            var col3 = document.createElement('div'); col3.className = 'col-md-2';
+            col3.innerHTML = '<button type="button" class="btn btn-gradient-danger w-100" onclick="sil(this)">-</button>';
+
+            row.append(col1, col2, col3);
+            document.getElementById('receteListesi').append(row);
+}
+            function sil(btn) { btn.closest('.row').remove(); }
+    </script>
+</body>
+</html>

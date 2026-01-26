@@ -1,0 +1,109 @@
+﻿@model IEnumerable<MDK.Models.Urun>
+@{
+    ViewBag.Title = "urun_listele";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urun Listesi</title>
+
+    <link rel="stylesheet"
+          href="/purple/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet"
+          href="/purple/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet"
+          href="/purple/assets/css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="~/purple/excel-print.css" rel="stylesheet" media="print" />
+</head>
+<body>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">URUNLER</h4>
+            <p class="card-description">
+                Ürün listesi
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Urun Adi</th>
+                        <th>Kategori</th>
+                        <th>Barkod</th>
+                        <th>Detaylar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model)
+                    {
+                        <tr>
+                            <td>@product.Urun_Ad</td>
+                            <td>@(product.Kategori != null ? product.Kategori.Kategori1 : "Kategori Yok")</td>
+                            <td>@product.Barkod</td>
+                            <td>
+                                <div class="d-flex">
+                                    <a class="btn btn-gradient-primary btn-sm btn-icon-split p-1 mx-1"
+                                       href="@Url.Action("Details_P", "Product", new { id = product.Id })">
+                                        Görüntüle
+                                    </a>
+                                    <a class="btn btn-gradient-warning btn-sm btn-icon-split p-1 mx-1"
+                                       href="@Url.Action("edit_P", "Product", new { id = product.Id })">
+                                        Düzelt
+                                    </a>
+
+                                    <button type="button"
+                                            class="btn btn-danger btn-sm btn-icon-split p-1 mx-1"
+                                            onclick="confirmDelete(@product.Id)">
+                                        Sil
+                                    </button>
+
+                                    <form id="deleteForm_@product.Id"
+                                          action="@Url.Action("Delete_P", "Product")"
+                                          method="post"
+                                          style="display: none;">
+                                        <input type="hidden" name="id" value="@product.Id" />
+                                        @Html.AntiForgeryToken()
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="d-flex justify-content-end mt-4">
+                <a href="@Url.Action("ExportPdf_P", "Product")"
+                   class="btn btn-gradient-primary me-2">
+                    <i class="mdi mdi-content-save"></i> PDF Oluştur
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SweetAlert2 library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+
+    <!-- Confirmation Script -->
+    <script>
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Silmek Istediginden Emin misin?',
+                text: "Bu işlemi geri alamazsın!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Evet, Sil',
+                cancelButtonText: 'İptal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deleteForm_' + id).submit();
+                }
+            });
+        }
+    </script>
+</body>
+</html>

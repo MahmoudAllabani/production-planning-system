@@ -1,0 +1,110 @@
+﻿@model MDK.Models.Personel
+
+@{
+    ViewBag.Title = "Edit_EM";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personel Düzenleme</title>
+    <link rel="stylesheet"
+          href="/purple/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet"
+          href="/purple/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet"
+          href="/purple/assets/css/style.css" />
+</head>
+
+<body>
+    <div class="col-md-8 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Personel Bilgileri Düzenleme</h4>
+
+                <form action="/Employee/Edit_EM" method="post" class="forms-sample">
+                    @Html.HiddenFor(m => m.Id)
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="employeeName">Ad</label>
+                            <input type="text" class="form-control" id="employeeName" name="employeeName" placeholder="Ad" value="@Model.Ad" required />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="employeeSurname">Soyad</label>
+                            <input type="text" class="form-control" id="employeeSurname" name="employeeSurname" placeholder="Soyad" value="@Model.Soyad" required />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="employeeEmail">E-Posta</label>
+                            <input type="email" class="form-control" id="employeeEmail" name="employeeEmail" placeholder="email@example.com" value="@Model.Gmail.Gmail1" required />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="employeeEvadresi">Adres</label>
+                            <input type="text" class="form-control" id="employeeEvadresi" name="employeeEvadresi" placeholder="Adres" value="@Model.Adres.Adres_Bilgisi" required />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="employeeYas">Yas</label>
+                            <input type="number" class="form-control" id="employeeYas" name="employeeYas" placeholder="0" min="0" value="@Model.Yas" required />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="employeeMaas">Maas</label>
+                            <input type="number" class="form-control" id="employeeMaas" name="employeeMaas" placeholder="0" min="0" value="@Model.Maas" required />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="employeeKimlikno">TC No</label>
+                            <input type="text" class="form-control" id="employeeKimlikno" name="employeeKimlikno" placeholder="TC" maxlength="11"
+                                   oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="@Model.Tc_Bilgileri.Tc_No" required />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="employeeTelefon">Telefon</label>
+                            <input type="tel" class="form-control" id="employeeTelefon" name="employeeTelefon" placeholder="05555555555"
+                                   maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="@Model.Telefon.Telefon_No" required />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="employeeMedeniHal" class="form-label">Medeni Hal</label>
+                            <select id="employeeMedeniHal" name="employeeMedeniHal" class="form-select" required>
+                                <option value="">Seciniz</option>
+                                <option value="bekar" @(Model.Medeni_Durumu == "Bekar" ? "selected" : "")>Bekar</option>
+                                <option value="evli" @(Model.Medeni_Durumu == "Evli" ? "selected" : "")>Evli</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="employeeCinsiyet">Cinsiyet</label>
+                            <select id="employeeCinsiyet" name="employeeCinsiyet" class="form-select" required>
+                                <option value="">Seciniz</option>
+                                <option value="erkek" @(Model.Cinsiyet == false ? "selected" : "")>Erkek</option>
+                                <option value="kadin" @(Model.Cinsiyet == true ? "selected" : "")>Kadin</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="employeeCocuksayisi">Cocuk Sayisi</label>
+                            <input type="number" class="form-control" id="employeeCocuksayisi" name="employeeCocuksayisi" placeholder="0" min="0" value="@Model.Cocuk_Sayisi" required />
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-gradient-primary me-2">Güncelle</button>
+                    <a href="/Employee/Index_EM" class="btn btn-light">İptal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

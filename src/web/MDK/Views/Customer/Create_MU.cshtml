@@ -1,0 +1,72 @@
+﻿@model MDK.Models.Musteri 
+
+@{
+    ViewBag.Title = "Create_MU";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musteri Ekleme</title>
+    <link rel="stylesheet"
+          href="/purple/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet"
+          href="/purple/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet"
+          href="/purple/assets/css/style.css" />
+</head>
+
+<body>
+    <div class="col-md-8 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Müşteri Bilgileri Ekleme</h4>
+
+                <form action="/Customer/Create_MU" method="post" class="forms-sample">
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="Ad">Ad</label>
+                            <input type="text" class="form-control" id="Ad" name="Ad" placeholder="Ad" required />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Soyad">Soyad</label>
+                            <input type="text" class="form-control" id="Soyad" name="Soyad" placeholder="Soyad" required />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="Email">E-Posta</label>
+                            <input type="email" class="form-control" id="Email" name="Email" placeholder="email@example.com" required />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Adres">Adres</label>
+                            <input type="text" class="form-control" id="Adres" name="Adres" placeholder="Adres" required />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="TC">TC No</label>
+                            <input type="text" class="form-control" id="TC" name="TC" placeholder="TC" maxlength="11"
+                                   oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Telefon">Telefon</label>
+                            <input type="tel" class="form-control" id="Telefon" name="Telefon" placeholder="05555555555"
+                                   maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-gradient-primary me-2">Ekle</button>
+                    <a href="/Customer/Index_MU" class="btn btn-light">İptal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

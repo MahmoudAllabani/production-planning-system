@@ -1,0 +1,88 @@
+﻿
+@model MDK.Models.Stok
+
+@{
+    ViewBag.Title = "Stok Güncelle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stok Güncelle</title>
+    <link rel="stylesheet" href="~/purple/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/purple/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/purple/assets/css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+@if (TempData["Hata"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Hata"]
+    </div>
+}
+
+<div class="loader"></div>
+<div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+    <div class="app-main__outer">
+        <div class="app-main__inner">
+            <div class="col-md-8 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-2">Stok Güncelle</h4>
+                        <p class="card-description mb-4">Stok bilgilerini güncelleyiniz</p>
+
+                        @using (Html.BeginForm("Edit_S", "Stock", FormMethod.Post, new { id = "editForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model => model.Id)
+
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    @Html.Label("Hammadde", htmlAttributes: new { @class = "form-label" })
+                                    @Html.DropDownListFor(model => model.Ham_Madde_FK,
+                                        (SelectList)ViewBag.Hammaddeler,
+                                        "Hammadde Seçin",
+                                        new { @class = "form-select", required = "required" })
+                                </div>
+
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.Miktar, "Miktar", new { @class = "form-label" })
+                                    @Html.TextBoxFor(model => model.Miktar, new
+                                        {
+                                            @class = "form-control",
+                                            required = "required",
+                                            type = "number",
+                                            min = "0",
+                                            style = "height:37px"
+                                        })
+                                </div>
+                            </div>
+
+                            <hr class="my-4 border-top border-2 border-secondary" />
+                            <button type="submit" class="btn btn-gradient-primary">Kaydet</button>
+                        }
+
+                        <script>
+                            document.getElementById("editForm").addEventListener("submit", function (event) {
+                                event.preventDefault();
+                                var form = event.target;
+
+                                Swal.fire({
+                                    title: "Başarılı!",
+                                    text: "Stok başarıyla güncellendi.",
+                                    icon: "success",
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then(function () {
+                                    form.submit();
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

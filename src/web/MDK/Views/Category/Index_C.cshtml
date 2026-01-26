@@ -1,0 +1,104 @@
+﻿
+@model IEnumerable<MDK.Models.Kategori>
+@{
+    ViewBag.Title = "Kategori Listesi";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+
+    <link rel="stylesheet"
+          href="~/purple/assets/vendors/mdi/css/materialdesignicons.min.css" />
+    <link rel="stylesheet"
+          href="~/purple/assets/vendors/css/vendor.bundle.base.css" />
+    <link rel="stylesheet"
+          href="~/purple/assets/css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css"
+          rel="stylesheet" />
+    <link href="~/purple/excel-print.css" rel="stylesheet" media="print" />
+</head>
+<body>
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title mb-5">KATEGORİLER</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width: 80px;">ID</th>
+                        <th>Kategori Adı</th>
+                        <th class="text-end">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Kategori1</td>
+                            <td>
+                                <div class="d-flex justify-content-end">
+                                    <a class="btn btn-gradient-primary btn-sm btn-icon-split p-1 mx-1"
+                                       href="@Url.Action("Edit_C", "Category", new { id = item.Id })">
+                                        Düzelt
+                                    </a>
+                                    <button type="button"
+                                            class="btn btn-danger btn-sm btn-icon-split p-1 mx-1"
+                                            onclick="confirmDelete(@item.Id)">
+                                        Sil
+                                    </button>
+                                    <form id="deleteForm_@item.Id"
+                                          action="@Url.Action("Delete_C","Category")"
+                                          method="post" style="display:none;">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                    </form>
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-end mt-4">
+                <a href="@Url.Action("ExportPdf_C", "Category")"
+                   class="btn btn-gradient-primary me-2">
+                    <i class="mdi mdi-content-save"></i> PDF Oluştur
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+    <script>
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Silmek Istediginden Emin misin?',
+                text: "Bu işlemi geri alamazsın!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Evet, Sil',
+                cancelButtonText: 'İptal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deleteForm_' + id).submit();
+                }
+            });
+        }
+    </script>
+
+
+</body>
+</html>

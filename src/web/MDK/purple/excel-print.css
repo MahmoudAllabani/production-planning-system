@@ -1,0 +1,27 @@
+﻿table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+    font-family: "Calibri", sans-serif !important;
+    font-size: 11pt !important;
+}
+
+th, td {
+    border: 1px solid #000 !important;
+    padding: 4px 6px !important;
+    text-align: left !important;
+}
+
+th {
+    background-color: #D9E1F2 !important;
+    font-weight: bold !important;
+}
+
+    .card-title,
+    .card-description,
+    th:last-child,
+    td:last-child,
+    a,
+    footer,
+    hr{
+        display: none !important;
+    }

@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "urun_detaylari";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using MDK.Models
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stok Takip</title>
+    <link rel="stylesheet" href="/purple/assets/vendors/mdi/css/materialdesignicons.min.css" />
+    <link rel="stylesheet" href="/purple/assets/vendors/css/vendor.bundle.base.css" />
+    <link rel="stylesheet" href="/purple/assets/css/style.css" />
+    <style>
+        .form-control,
+        .form-control:disabled,
+        .form-control[disabled] {
+            background-color: white !important;
+            border: 1px solid #ebedf2 !important;
+            border-radius: 4px;
+        }
+
+        textarea.form-control {
+            background-color: white !important;
+            border: 1px solid #ebedf2 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="col-md-8 grid-margin stretch-card">
+        <div class="card" style="background-color: transparent; box-shadow: none;">
+            <div class="card-body" style="padding: 0;">
+                <h4 class="card-title mb-5">Ürün Detayları</h4>
+
+                <div class="mt-4">
+                    <form class="forms-sample">
+
+                        <!-- Ürün Kodu -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="productCode" class="form-label">Ürün Kodu</label>
+                                <input type="text" class="form-control" id="productCode" value="@ViewBag.Id" disabled />
+                            </div>
+                        </div>
+
+                        <!-- Ürün Adı -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="productName" class="form-label">Ürün Adı</label>
+                                <input type="text" class="form-control" id="productName" value="@ViewBag.UrunAd" disabled />
+                            </div>
+                        </div>
+
+                        <!-- Kategori -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="productKategori" class="form-label">Kategori</label>
+                                <input type="text" class="form-control" id="productKategori" value="@ViewBag.KategoriAd" disabled />
+                            </div>
+                        </div>
+
+                        <!-- Birim -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="productBirim" class="form-label">Birim</label>
+                                <input type="text" class="form-control" id="productBirim" value="@ViewBag.BirimTip" disabled />
+                            </div>
+                        </div>
+
+                        <!-- Barkod -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="productBarkod" class="form-label">Barkod</label>
+                                <input type="text" class="form-control" id="productBarkod" value="@ViewBag.Barkod" disabled />
+                            </div>
+                        </div>
+
+                        <!-- Kapasite -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="productKapasite" class="form-label">Kapasite</label>
+                                <input type="text" class="form-control" id="productKapasite" value="@ViewBag.Kapasite" disabled />
+                            </div>
+                        </div>
+
+                        <!-- Hammadde - Miktar -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label">Hammadde - Miktar</label>
+                                @for (int i = 0; i < ViewBag.HammaddeListesi.Count; i++)
+                                {
+                                    <div class="row mb-2">
+                                        <div class="col-6">
+                                            <input type="text" class="form-control" value="@ViewBag.HammaddeListesi[i]" disabled />
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="text" class="form-control" value="@ViewBag.MiktarListesi[i] @ViewBag.BirimListesi[i]" disabled />
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Kalite Rapor -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="employeeKaliteRapor" class="form-label">Kalite Rapor</label>
+                                <textarea class="form-control overflow-auto" id="employeeKaliteRapor" rows="4" style="height: 100px;" disabled>@ViewBag.KaliteRaporu</textarea>
+                            </div>
+                        </div>
+
+                        <!-- Tanım -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="productTanim" class="form-label">Tanım</label>
+                                <textarea class="form-control overflow-auto" id="productTanim" rows="4" style="height: 100px;" disabled>@ViewBag.Tanim</textarea>
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="window.history.back()" class="btn btn-gradient-primary me-2">Geri Dön</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
