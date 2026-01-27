@@ -1,0 +1,7 @@
+# Ignore template / assets from language stats
+src/web/purple/** linguist-vendored
+src/web/Content/** linguist-vendored
+src/web/Scripts/** linguist-vendored
+
+# Treat C# as main language
+*.cs linguist-language=C#
