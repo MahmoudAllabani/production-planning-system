@@ -75,12 +75,18 @@ Includes an ML.NET demand forecasting module integrated into the web application
 This project is a prototype / academic project and was not deployed for a real company.
 
 ## Screenshots
-![Login](docs/screenshots/login.png)
-![Dashboard](docs/screenshots/dashboard.png)
-![Orders](docs/screenshots/orders.png)
-![Maintenance](docs/screenshots/maintenance.png)
-![Demand Forecast](docs/screenshots/prediction.png)
 
+| Login | Dashboard |
+|-------|-----------|
+| ![](docs/screenshots/login.png) | ![](docs/screenshots/dashboard.png) |
+
+| Orders | Maintenance |
+|--------|-------------|
+| ![](docs/screenshots/orders.png) | ![](docs/screenshots/maintenance.png) |
+
+| Demand Forecast |  |
+|----------------|--|
+| ![](docs/screenshots/prediction.png) |  |
 
 
 
