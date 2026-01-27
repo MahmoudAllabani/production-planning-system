@@ -1,25 +1,9 @@
-# ================================
-# Ignore frontend / template files
-# ================================
-src/web/Content/** linguist-vendored
-src/web/Scripts/** linguist-vendored
+# Hide template / third-party assets from language stats
 src/web/purple/** linguist-vendored
 src/web/Rotativa/** linguist-vendored
 
-# ================================
-# Ignore common frontend extensions
-# ================================
-*.html linguist-vendored
-*.css linguist-vendored
-*.scss linguist-vendored
-*.js linguist-vendored
-
-# ================================
-# Treat Razor views as C#
-# ================================
+# Treat Razor views as C# (MVC views)
 *.cshtml linguist-language=C#
 
-# ================================
-# Force C# as main language
-# ================================
+# Ensure C# files are recognized
 *.cs linguist-language=C#
